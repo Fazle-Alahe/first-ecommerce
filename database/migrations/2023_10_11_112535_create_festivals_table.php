@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('festivals', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->integer('discount');
+            $table->string('left_image');
+            $table->string('right_image');
             $table->timestamps();
         });
     }

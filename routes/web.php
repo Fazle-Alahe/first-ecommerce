@@ -53,6 +53,9 @@ Route::get('/offer', [OfferController::class, 'offer'])->name('offer');
 Route::post('/offer1/store', [OfferController::class, 'offer1_store'])->name('offer1.store');
 Route::post('/offer2/store', [OfferController::class, 'offer2_store'])->name('offer2.store');
 
+Route::get('festival/offer/', [OfferController::class, 'festival_offer'])->name('festival.offer');
+Route::post('festival/offer/store/', [OfferController::class, 'festival_offer_store'])->name('festival.offer.store');
+
 //user
 Route::get('/user/update', [UserController::class, 'user_update'])->name('user.update');
 Route::post('/user/info/update', [UserController::class, 'user_info_update'])->name('user.info.update');

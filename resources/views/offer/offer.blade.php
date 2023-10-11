@@ -36,9 +36,6 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image"  onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
-                        @error('image')
-                            <strong class="text-danger">{{$message}}</strong>
-                        @enderror
                         <div class="my-2">
                             <img width="200" id="blah" src="{{asset('uploads/offer/')}}/{{$offer->first()->image}}" alt="">
                         </div>
@@ -85,9 +82,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image2"  onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])">
-                        @error('image')
-                            <strong class="text-danger">{{$message}}</strong>
-                        @enderror
+                       
                         <div class="my-2">
                             <img width="200" id="blah2" src="{{asset('uploads/offer/')}}/{{$offer2->first()->image}}" alt="">
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Festival;
 use App\Models\Offer;
 use App\Models\Offer2;
 use Carbon\Carbon;
@@ -89,5 +90,57 @@ class OfferController extends Controller
         }
            
         return back()->with('success2', 'Offer2 updated successfully');
+    }
+
+    // festival offer
+    function festival_offer(){
+        $festival = Festival::all();
+        return view('offer.festival_offer',[
+            'festival' => $festival,
+        ]);
+    }
+    
+    function festival_offer_store(Request $request){
+        $request->validate([
+            'title' => 'required',
+            'discount' => 'required',
+            'left_image' => 'image',
+            'right_image' => 'image',
+        ]);
+
+        if($request->hasFile('left_image')){
+            $left_image = Festival::first();
+            $img_delete = public_path('uploads/offer/'.$left_image->left_image);
+            unlink($img_delete);
+
+            $left_image = $request->left_image;
+            $extension1 = $left_image->extension();
+            $file_name1 = Str::lower( str_replace(' ', '-', 'left_image')).'-'.random_int(50000, 60000).'.'.$extension1;
+            Image::make($left_image)->save(public_path('uploads/offer/'.$file_name1));
+        }else{
+            $file_name1 = Festival::where('id', 4)->pluck('left_image')->first();
+        }
+
+        if($request->hasFile('right_image')){
+            $right_image = Festival::first();
+            $img_delete = public_path('uploads/offer/'.$right_image->right_image);
+            unlink($img_delete);
+
+            $right_image = $request->right_image;
+            $extension2 = $right_image->extension();
+            $file_name2 = Str::lower( str_replace(' ', '-', 'right_image')).'-'.random_int(50000, 60000).'.'.$extension2;
+            Image::make($right_image)->save(public_path('uploads/offer/'.$file_name2));
+        }else{
+            $file_name2 = Festival::where('id', 4)->pluck('right_image')->first();
+        }
+
+        Festival::where('id', 4)->update([
+            'title' => $request->title,
+            'discount' => $request->discount,
+            'left_image' => $file_name1,
+            'right_image' => $file_name2,
+        ]);
+           
+        return back()->with('success', 'Festival Offer updated successfully');
     }
 }
