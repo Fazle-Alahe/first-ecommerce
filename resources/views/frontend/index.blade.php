@@ -138,7 +138,8 @@
                                     @else
                                         {{$product->product_name}}
                                     @endif
-                                    </a></h2>
+                                    </a>
+                                </h2>
                                 <div class="rating-product">
                                     <i class="fi flaticon-star"></i>
                                     <i class="fi flaticon-star"></i>
@@ -187,7 +188,7 @@
                 </svg>
             </div>
             <div class="left-image">
-                <img src="{{asset('frontend')}}/images/upcomming-left.png" alt="">
+                <img src="{{asset('uploads/offer/')}}/{{$festivals->first()->left_image}}" alt="">
             </div>
             <div class="right-shape">
                 <svg width="448" height="448" viewBox="0 0 448 448" fill="none">
@@ -203,7 +204,7 @@
                 </svg>
             </div>
             <div class="right-image">
-                <img src="{{asset('frontend')}}/images/upcomming-right.png" alt="">
+                <img src="{{asset('uploads/offer/')}}/{{$festivals->first()->right_image}}" alt="">
             </div>
             <div class="section-title-text">
                 <h2>New Year Sale</h2>
@@ -255,10 +256,17 @@
                     <li>
                         <div class="product-item">
                             <div class="image">
-                                <img src="{{asset('frontend')}}/images/special-product-1.jpg" alt="">
+                                <img height="250" src="{{asset('uploads/offer/')}}/{{$special_offers->first()->image}}" alt="">
                             </div>
                             <div class="text">
-                                <h2><a href="product-single.html">Jewelry Sets</a></h2>
+                                <h2><a href="product-single.html" title="{{$special_offers->first()->product_name}}">
+                                    @if (strlen($special_offers->first()->product_name) > 20)
+                                        {{substr($special_offers->first()->product_name, 0, 20).'...'}}
+                                    @else
+                                        {{$special_offers->first()->product_name}}
+                                    @endif
+                                    </a>
+                                </h2>
                                 <div class="rating-product">
                                     <i class="fi flaticon-star"></i>
                                     <i class="fi flaticon-star"></i>
@@ -268,8 +276,10 @@
                                     <span>130</span>
                                 </div>
                                 <div class="price">
-                                    <span class="present-price">$120.00</span>
-                                    <del class="old-price">$200.00</del>
+                                    <span class="present-price">&#2547;{{$special_offers->first()->discount_price}}</span>
+                                    @if ($special_offers->first()->discount_price)
+                                        <del class="old-price">&#2547;{{$special_offers->first()->price}}</del>
+                                    @endif
                                 </div>
                                 <div class="shop-btn">
                                     <a class="theme-btn-s2" href="product.html">Shop Now</a>
@@ -278,27 +288,35 @@
                         </div>
                     </li>
                 </ul>
-            </div>
-            <div class="col-lg-6 col-12">
+            </div><div class="col-lg-6 col-12">
                 <ul class="special-product">
                     <li>
                         <div class="product-item">
                             <div class="image">
-                                <img src="{{asset('frontend')}}/images/special-product-2.jpg" alt="">
+                                <img height="250" src="{{asset('uploads/offer/')}}/{{$special_offers2->first()->image2}}" alt="">
                             </div>
                             <div class="text">
-                                <h2><a href="product-single.html">White Shoe</a></h2>
+                                <h2><a href="product-single.html" title="{{$special_offers2->first()->product_name2}}">
+                                    @if (strlen($special_offers2->first()->product_name2) > 20)
+                                        {{substr($special_offers2->first()->product_name2, 0, 20).'...'}}
+                                    @else
+                                        {{$special_offers2->first()->product_name2}}
+                                    @endif
+                                    </a>
+                                </h2>
                                 <div class="rating-product">
                                     <i class="fi flaticon-star"></i>
                                     <i class="fi flaticon-star"></i>
                                     <i class="fi flaticon-star"></i>
                                     <i class="fi flaticon-star"></i>
                                     <i class="fi flaticon-star"></i>
-                                    <span>150</span>
+                                    <span>130</span>
                                 </div>
                                 <div class="price">
-                                    <span class="present-price">$100.00</span>
-                                    <del class="old-price">$150.00</del>
+                                    <span class="present-price">&#2547;{{$special_offers2->first()->discount_price2}}</span>
+                                    @if ($special_offers2->first()->discount_price2)
+                                        <del class="old-price">&#2547;{{$special_offers2->first()->price2}}</del>
+                                    @endif
                                 </div>
                                 <div class="shop-btn">
                                     <a class="theme-btn-s2" href="product.html">Shop Now</a>

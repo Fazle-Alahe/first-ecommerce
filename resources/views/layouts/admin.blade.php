@@ -209,6 +209,13 @@ License: You must have a valid license purchased only from above link or https:/
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{route('special.offer')}}">
+              <i class="link-icon" data-feather="feather"></i>
+              <span class="link-title">Special Offer</span>
+              <i class="link-arrow"></i>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
               <i class="link-icon" data-feather="feather"></i>
               <span class="link-title">Category</span>

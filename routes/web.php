@@ -10,6 +10,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SpecialOfferController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariationController;
@@ -53,8 +54,13 @@ Route::get('/offer', [OfferController::class, 'offer'])->name('offer');
 Route::post('/offer1/store', [OfferController::class, 'offer1_store'])->name('offer1.store');
 Route::post('/offer2/store', [OfferController::class, 'offer2_store'])->name('offer2.store');
 
-Route::get('festival/offer/', [OfferController::class, 'festival_offer'])->name('festival.offer');
-Route::post('festival/offer/store/', [OfferController::class, 'festival_offer_store'])->name('festival.offer.store');
+Route::get('/festival/offer/', [OfferController::class, 'festival_offer'])->name('festival.offer');
+Route::post('/festival/offer/store/', [OfferController::class, 'festival_offer_store'])->name('festival.offer.store');
+
+// Special Offer
+Route::get('/special/offer/', [SpecialOfferController::class, 'special_offer'])->name('special.offer');
+Route::post('/special/offer/store/', [SpecialOfferController::class, 'special_offer_store'])->name('special.offer.store');
+Route::post('/special/offer2/store/', [SpecialOfferController::class, 'special_offer2_store'])->name('special.offer2.store');
 
 //user
 Route::get('/user/update', [UserController::class, 'user_update'])->name('user.update');
