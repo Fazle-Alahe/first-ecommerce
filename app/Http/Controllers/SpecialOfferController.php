@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 class SpecialOfferController extends Controller
 {
    function special_offer(){
-        return view('offer.special_offer');
+    $special_offers = SpecialOffer::all();
+    $special_offers2 = SpecialOffer2::all();
+        return view('offer.special_offer',[
+            'special_offers' => $special_offers,
+            'special_offers2' => $special_offers2,
+        ]);
    }
 
    function special_offer_store(Request $request){

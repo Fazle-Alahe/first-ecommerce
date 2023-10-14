@@ -342,13 +342,26 @@
             </div>
         </div>
         <div class="trendin-slider owl-carousel">
-            <div class="product-item">
+           @foreach ($products as $product)
+           <div class="product-item">
                 <div class="image">
-                    <img src="{{asset('frontend')}}/images/trending-product/1.png" alt="">
-                    <div class="tag new">New</div>
+                    <img height="250px" src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
+                    @if ($product->discount)
+                        <div class="tag sale">-{{$product->discount}}%</div>
+                    @else
+                        <div class="tag new">New</div>
+                    @endif
                 </div>
                 <div class="text">
-                    <h2><a href="product-single.html">Pink Baby Shoes</a></h2>
+                    <h2>
+                        <a href="product-single.html" title="{{$product->product_name}}">
+                        @if (strlen($product->product_name) > 20)
+                            {{substr($product->product_name, 0, 20).'...'}}
+                        @else
+                            {{$product->product_name}}
+                        @endif
+                        </a>
+                    </h2>
                     <div class="rating-product">
                         <i class="fi flaticon-star"></i>
                         <i class="fi flaticon-star"></i>
@@ -358,111 +371,17 @@
                         <span>130</span>
                     </div>
                     <div class="price">
-                        <span class="present-price">$120.00</span>
-                        <del class="old-price">$200.00</del>
+                        <span class="present-price">&#2547; {{$product->after_discount}}</span>
+                        @if ($product->discount)
+                            <del class="old-price">&#2547; {{$product->product_price}}</del>
+                        @endif
                     </div>
                     <div class="shop-btn">
                         <a class="theme-btn-s2" href="product.html">Shop Now</a>
                     </div>
                 </div>
             </div>
-            <div class="product-item">
-                <div class="image">
-                    <img src="{{asset('frontend')}}/images/trending-product/2.png" alt="">
-                    <div class="tag sale">Sale</div>
-                </div>
-                <div class="text">
-                    <h2><a href="product-single.html">Earrings</a></h2>
-                    <div class="rating-product">
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <span>120</span>
-                    </div>
-                    <div class="price">
-                        <span class="present-price">$120.00</span>
-                        <del class="old-price">$160.00</del>
-                    </div>
-                    <div class="shop-btn">
-                        <a class="theme-btn-s2" href="product.html">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="image">
-                    <img src="{{asset('frontend')}}/images/trending-product/3.png" alt="">
-                    <div class="tag new">New</div>
-                </div>
-                <div class="text">
-                    <h2><a href="product-single.html">Stylish Pink Bag</a></h2>
-                    <div class="rating-product">
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <span>201</span>
-                    </div>
-                    <div class="price">
-                        <span class="present-price">$130.00</span>
-                        <del class="old-price">$180.00</del>
-                    </div>
-                    <div class="shop-btn">
-                        <a class="theme-btn-s2" href="product.html">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="image">
-                    <img src="{{asset('frontend')}}/images/trending-product/4.png" alt="">
-                    <div class="tag sale">Sale</div>
-                </div>
-                <div class="text">
-                    <h2><a href="product-single.html">Orange Top</a></h2>
-                    <div class="rating-product">
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <span>310</span>
-                    </div>
-                    <div class="price">
-                        <span class="present-price">$200.00</span>
-                        <del class="old-price">$350.00</del>
-                    </div>
-                    <div class="shop-btn">
-                        <a class="theme-btn-s2" href="product.html">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="image">
-                    <img src="{{asset('frontend')}}/images/trending-product/5.png" alt="">
-                    <div class="tag new">New</div>
-                    
-                </div>
-                <div class="text">
-                    <h2><a href="product-single.html">Wireless Headphones</a></h2>
-                    <div class="rating-product">
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <i class="fi flaticon-star"></i>
-                        <span>130</span>
-                    </div>
-                    <div class="price">
-                        <span class="present-price">$120.00</span>
-                        <del class="old-price">$200.00</del>
-                    </div>
-                    <div class="shop-btn">
-                        <a class="theme-btn-s2" href="product.html">Shop Now</a>
-                    </div>
-                </div>
-            </div>
+           @endforeach
         </div>
     </div>
 </section>
@@ -546,72 +465,40 @@
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="highlight-wrap">
                     <h2>Recently added</h2>
-                    <div class="product-card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{asset('frontend')}}/images/recently-added/1.png" alt="">
+                    @foreach ($products->take(3) as $product)
+                        <div class="product-card">
+                            <div class="card-image">
+                                <div class="image">
+                                    <img height="125px" src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
+                                </div>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <a href="product.html" title="{{$product->product_name}}">
+                                    @if (strlen($product->product_name) > 20)
+                                        {{substr($product->product_name, 0, 20).'...'}}
+                                    @else
+                                        {{$product->product_name}}
+                                    @endif
+                                    </a>
+                                </h3>
+                                <div class="rating-product">
+                                    <i class="fi flaticon-star"></i>
+                                    <i class="fi flaticon-star"></i>
+                                    <i class="fi flaticon-star"></i>
+                                    <i class="fi flaticon-star"></i>
+                                    <i class="fi flaticon-star"></i>
+                                    <span>120</span>
+                                </div>
+                                <div class="price">
+                                    <span class="present-price">&#2547; {{$product->after_discount}}</span>
+                                    @if ($product->discount)
+                                        <del class="old-price">&#2547; {{$product->product_price}}</del>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                        <div class="content">
-                            <h3><a href="product.html">Kids Shoes</a></h3>
-                            <div class="rating-product">
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <span>120</span>
-                            </div>
-                            <div class="price">
-                                <span class="present-price">$120.00</span>
-                                <del class="old-price">$150.00</del>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{asset('frontend')}}/images/recently-added/2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h3><a href="product.html">Stylish Earrings</a></h3>
-                            <div class="rating-product">
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <span>230</span>
-                            </div>
-                            <div class="price">
-                                <span class="present-price">$150.00</span>
-                                <del class="old-price">$200.00</del>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{asset('frontend')}}/images/recently-added/3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h3><a href="product.html">Yellow Hats</a></h3>
-                            <div class="rating-product">
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <span>130</span>
-                            </div>
-                            <div class="price">
-                                <span class="present-price">$170.00</span>
-                                <del class="old-price">$250.00</del>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-12">
