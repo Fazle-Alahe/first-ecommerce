@@ -586,9 +586,10 @@
                     <div class="cta-content">
                         <h2>Subscribe Our Newsletter & <br>
                             Get 30% Discounts For Next Order</h2>
-                        <form>
+                        <form action="{{route('subscriber.store')}}" method="POST">
+                            @csrf
                             <div class="input-1">
-                                <input type="email" class="form-control" placeholder="Your Email..."
+                                <input type="email" name="email" class="form-control" placeholder="Your Email..."
                                     required="">
                                 <div class="submit clearfix">
                                     <button class="theme-btn-s2" type="submit">Subscribe</button>

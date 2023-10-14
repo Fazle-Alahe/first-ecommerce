@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\subscriber;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -44,4 +46,20 @@ class HomeController extends Controller
         return back()->with('add_success', 'New user added successfully');
     }
     
+
+    function subscriber_store(Request $request){
+        subscriber::insert([
+            'customer_id' => 1,
+            'email' => $request->email,
+            'created_at' => Carbon::now(),
+        ]);
+        return back();
+    }
+
+    function subscriber(){
+        $subscibers = subscriber::all();
+        return view('subscriber.subscriber',[
+            'subscibers' => $subscibers,
+        ]);
+    }
 }

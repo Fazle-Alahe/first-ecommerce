@@ -62,6 +62,10 @@ Route::get('/special/offer/', [SpecialOfferController::class, 'special_offer'])-
 Route::post('/special/offer/store/', [SpecialOfferController::class, 'special_offer_store'])->name('special.offer.store');
 Route::post('/special/offer2/store/', [SpecialOfferController::class, 'special_offer2_store'])->name('special.offer2.store');
 
+// Subscriber
+Route::get('subscriber', [HomeController::class,'subscriber'])->name('subscriber');
+Route::post('/subscriber/store/', [HomeController::class,'subscriber_store'])->name('subscriber.store');
+
 //user
 Route::get('/user/update', [UserController::class, 'user_update'])->name('user.update');
 Route::post('/user/info/update', [UserController::class, 'user_info_update'])->name('user.info.update');
