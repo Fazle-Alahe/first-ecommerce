@@ -25,6 +25,7 @@ return new class extends Migration
             $table->longText('long_desp')->nullable();
             $table->longText('addi_info')->nullable();
             $table->string('prev_img');
+            $table->string('slug');
             $table->integer('status');
             $table->timestamps();
         });

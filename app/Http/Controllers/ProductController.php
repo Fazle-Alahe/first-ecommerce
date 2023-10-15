@@ -48,6 +48,7 @@ class ProductController extends Controller
 
         
         $remove = array("@", "!", "#", "(", ")", "*", "/", '"');
+        $slug = Str::lower( str_replace( $remove , '-', $request->product_name)).'-'.random_int(500000, 600000);
         $prev_img = $request->prev_img;
         $extension = $prev_img->extension();
         $file_name = Str::lower( str_replace( $remove , '-', $request->product_name)).'-'.random_int(50000, 60000).'.'.$extension;
@@ -66,6 +67,7 @@ class ProductController extends Controller
             'long_desp'=>$request->long_desp,
             'addi_info'=>$request->addi_info,
             'prev_img'=>$file_name,
+            'slug' => $slug,
             'created_at'=>Carbon::now(),
         ]);
 
