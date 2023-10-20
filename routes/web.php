@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[FrontendController::class, 'welcome'])->name('index');
 
 Route::get('/dashboard',[HomeController::class, 'dashboard'] )->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/product/details/{slug}',[FrontendController::class, 'product_details'])->name('product.details');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

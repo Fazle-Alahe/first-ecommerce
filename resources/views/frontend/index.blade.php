@@ -132,7 +132,7 @@
                                 @endif
                             </div>
                             <div class="text">
-                                <h2><a href="product-single.html" title="{{$product->product_name}}">
+                                <h2><a href="{{route('product.details',$product->slug)}}" title="{{$product->product_name}}">
                                     @if (strlen($product->product_name) > 20)
                                         {{substr($product->product_name, 0, 20).'...'}}
                                     @else

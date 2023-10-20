@@ -30,8 +30,8 @@ class InventoryController extends Controller
 
         if(Inventory::where('product_id', $id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->exists()){
             Inventory::where('product_id', $id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->increment('quantity', $request->quantity);
+            return back()->with('increment', 'Inventory increased!!');
         }
-        return back()->with('increment', 'Inventory increased!!');
 
         Inventory::insert([
             'product_id' => $id,
