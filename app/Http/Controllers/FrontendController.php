@@ -59,4 +59,34 @@ class FrontendController extends Controller
             'available_size' => $available_size,
         ]);
     }
+
+    function getSize(Request $request){
+        $str = '';
+        $sizes = Inventory::where('product_id', $request->product_id)->where('color_id', $request->color_id)->get();
+        foreach($sizes as $size){
+            if($size -> rel_to_size -> size_name == 'NA'){
+                $str = '<li class="color"><input class="size_id" checked id="size'.$size->size_id.'" type="radio" name="size_id" value="'.$size->size_id.'">
+                <label for="size'.$size->size_id.'">'.$size->rel_to_size->size_name.'</label>
+            </li>';
+            }
+            else{
+                $str .= '<li class="color"><input class="size_id" id="size'.$size->size_id.'" type="radio" name="size_id" value="'.$size->size_id.'">
+                <label for="size'.$size->size_id.'">'.$size->rel_to_size->size_name.'</label>
+                </li>';
+            }
+        }
+        echo $str;
+    }
+
+    function getQuantity(Request $request){
+        $str = '';
+        $quantity =  Inventory::where('product_id', $request->product_id)->where('color_id', $request->color_id)->where('size_id', $request->size_id)->first()->quantity;
+        if($quantity == 0){
+            $str = '<strong id="quan" class="btn btn-danger">Out of Stock</strong>';
+        }
+        else{
+            $str = '<strong id="quan" class="btn btn-success">'.$quantity.' In Stock</strong>';
+        }
+        echo $str;
+    }
 }

@@ -67,11 +67,11 @@
                                         <ul>
                                             @foreach ($available_colors as $color)
                                             @if ($color->rel_to_color->color_name == 'NA')
-                                                <li class="color1"><input checked disabled id="color{{$color->color_id}}" type="radio" name="color" value="{{$color->color_id}}">
+                                                <li class="color1"><input class="color_id" checked disabled id="color{{$color->color_id}}" type="radio" name="color" value="{{$color->color_id}}">
                                                     <label for="color{{$color->color_id}}" style="background: {{$color->rel_to_color->color_code}}">NA</label>
                                                 </li>
                                             @else
-                                                <li class="color1"><input id="color_id{{$color->color_id}}" type="radio" name="color_id" value="{{$color->color_id}}">
+                                                <li class="color1"><input class="color_id" id="color_id{{$color->color_id}}" type="radio" name="color_id" value="{{$color->color_id}}">
                                                     <label for="color_id{{$color->color_id}}" style="background: {{$color->rel_to_color->color_code}}"></label>
                                                 </li>
                                             @endif
@@ -83,9 +83,9 @@
                                 <div class="product-filter-item color filter-size">
                                     <div class="color-name">
                                         <span>Sizes:</span>
-                                        <ul>
+                                        <ul class="available_size">
                                             @foreach ($available_size as $size)   
-                                                <li class="color"><input id="size{{$size->size_id}}" type="radio" name="size_id" value="{{$size->size_id}}">
+                                                <li class="color"><input class="size_id" id="size{{$size->size_id}}" type="radio" name="size_id" value="{{$size->size_id}}">
                                                     <label for="size{{$size->size_id}}">{{$size->rel_to_size->size_name}}</label>
                                                 </li>
                                             @endforeach
@@ -111,6 +111,7 @@
                                             <a href="" class="badge bg-warning text-dark">{{$tags}}</a>
                                         @endforeach
                                     </li>
+                                    <li class="mt-1" id="quan"></li>
                                 </ul>
                             </div>
                         </div>
@@ -340,4 +341,47 @@
         </div>
         <!-- product-single-section  end-->
 
+@endsection
+
+@section('footer_script')
+    <script>
+        $('.color_id').click(function(){
+            var color_id = $(this).val();
+            var product_id = '{{$product_info->id}}';
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'/getSize',
+                type: 'POST',
+                data:{'color_id': color_id, 'product_id': product_id},
+
+                success:function(data){
+                    $('.available_size').html(data);
+                    
+                    $('.size_id').click(function(){
+                        var $size_id = $(this).val();
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                            $.ajax({
+                            url:'/getQuantity',
+                            type: 'POST',
+                            data:{'color_id': color_id, 'product_id': product_id, 'size_id': $size_id},
+
+                            success:function(data){
+                                $('#quan').html(data);
+                            }
+                        });
+                    })
+                }
+
+            });
+        })
+    </script>
 @endsection
