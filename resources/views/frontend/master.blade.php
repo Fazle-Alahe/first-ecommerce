@@ -125,8 +125,13 @@
                                 <ul>
                                     <li><a href="compare.html"><i class="fi flaticon-right-and-left"></i><span>Compare</span></a>
                                     </li>
-                                    <li><a href="login.html"><i class="fi flaticon-user-profile"></i><span>Login</span></a></li>
                                     <li>
+                                        @auth('customer')
+                                            <a href="{{route('customer.profile')}}"><i class="fi flaticon-user-profile"></i><span>{{Auth::guard('customer')->user()->fname.' '.Auth::guard('customer')->user()->lname}}</span></a>
+                                        @else
+                                            <a href="{{route('customer.login')}}"><i class="fi flaticon-user-profile"></i><span>Login</span></a>
+                                        @endauth
+                                    </li>
                                         <div class="header-wishlist-form-wrapper">
                                             <button class="wishlist-toggle-btn"> <i class="fi flaticon-heart"></i>
                                                 <span class="cart-count">3</span></button>
@@ -449,7 +454,7 @@
     <script src="{{asset('frontend')}}/js/jquery-plugin-collection.js"></script>
     <!-- Custom script for this template -->
     <script src="{{asset('frontend')}}/js/script.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('footer_script')
 </body>
 </html>
