@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialOfferController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariationController;
 use App\Models\Inventory;
@@ -138,3 +139,12 @@ Route::post('/customer/store/', [CustomerAuthController::class, 'customer_store'
 Route::post('/customer/logged/', [CustomerAuthController::class, 'customer_logged'])->name('customer.logged');
 Route::get('/customer/profile/', [CustomerController::class, 'customer_profile'])->name('customer.profile');
 Route::get('/customer/logout/', [CustomerController::class, 'customer_logout'])->name('customer.logout');
+Route::post('/customer/profile/update/', [CustomerController::class, 'customer_profile_update'])->name('customer.profile.update');
+
+
+
+
+
+
+
+
