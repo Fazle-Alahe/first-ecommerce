@@ -645,4 +645,5 @@ if ($("#clock").length) {
         })
     </script>
 @endif
+
 @endsection
