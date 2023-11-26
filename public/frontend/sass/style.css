@@ -15383,5 +15383,7 @@ input[type=checkbox]:checked:disabled + label:before {
 /*# sourceMappingURL=style.css.map */
 
 .swal2-icon-success{
-  background: red !important;
+  background: #6c972c !important;
+  color: white;
+  font-size: 16px;
 }

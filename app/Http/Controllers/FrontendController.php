@@ -60,6 +60,14 @@ class FrontendController extends Controller
         ]);
     }
 
+
+    function all_products(){
+        $products = Product::all();
+        return view('frontend.product_view_all',[
+            'products' => $products,
+        ]);
+    }
+
     function getSize(Request $request){
         $str = '';
         $sizes = Inventory::where('product_id', $request->product_id)->where('color_id', $request->color_id)->get();

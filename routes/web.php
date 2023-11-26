@@ -36,6 +36,7 @@ Route::get('/',[FrontendController::class, 'welcome'])->name('index');
 
 Route::get('/dashboard',[HomeController::class, 'dashboard'] )->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/product/details/{slug}',[FrontendController::class, 'product_details'])->name('product.details');
+Route::get('/all/products/',[FrontendController::class, 'all_products'])->name('all.products');
 Route::post('/getSize',[FrontendController::class, 'getSize']);
 Route::post('/getQuantity',[FrontendController::class, 'getQuantity']);
 
@@ -144,6 +145,9 @@ Route::post('/customer/profile/update/', [CustomerController::class, 'customer_p
 
 // Cart
 Route::post('/add/cart/', [CartController::class, 'add_cart'])->name('add.cart');
+Route::get('/cart/remove/{id}', [CartController::class, 'cart_remove'])->name('cart.remove');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::post('/cart/update/', [CartController::class, 'cart_update'])->name('cart.update');
 
 
 

@@ -24,4 +24,25 @@ class CartController extends Controller
         ]);
         return back()->with('cart_added', 'Cart Added!');
     }
+
+    function cart_remove($id){
+        Cart::find($id)->delete();
+        return back();
+    }
+
+    function cart(){
+        $carts = Cart::where('customer_id', Auth::guard('customer')->id())->get();
+        return view('frontend.cart',[
+            'carts' => $carts,
+        ]);
+    }
+
+    function cart_update(Request $request){
+        foreach($request->quantity as $cart_id => $quantity){
+            Cart::find($cart_id)->update([
+                'quantity' => $quantity,
+            ]);
+        }
+        return back();  
+    }
 }

@@ -162,7 +162,7 @@
                     </div>
                 @endforeach
                 <div class="more-btn">
-                    <a class="theme-btn-s2" href="product.html">View All</a>
+                    <a class="theme-btn-s2" href="{{route('all.products')}}">View All</a>
                 </div>
             </div>
         </div>

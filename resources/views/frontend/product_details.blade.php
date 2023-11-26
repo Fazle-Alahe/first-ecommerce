@@ -69,7 +69,7 @@
                                             <ul>
                                                 @foreach ($available_colors as $color)
                                                 @if ($color->rel_to_color->color_name == 'NA')
-                                                    <li class="color1"><input class="color_id" checked disabled id="color{{$color->color_id}}" type="radio" name="color_id" value="{{$color->color_id}}">
+                                                    <li class="color1"><input class="color_id" checked id="color{{$color->color_id}}" type="radio" name="color_id" value="{{$color->color_id}}">
                                                         <label for="color{{$color->color_id}}" style="background: {{$color->rel_to_color->color_code}}">NA</label>
                                                     </li>
                                                 @else
@@ -88,10 +88,17 @@
                                         <div class="color-name">
                                             <span>Sizes:</span>
                                             <ul class="available_size">
-                                                @foreach ($available_size as $size)   
+                                                @foreach ($available_size as $size) 
+                                                @if ($size->rel_to_size->size_name == 'NA')
+                                                    <li class="color"><input checked class="size_id" id="size{{$size->size_id}}" type="radio" name="size_id" value="{{$size->size_id}}">
+                                                        <label for="size{{$size->size_id}}">{{$size->rel_to_size->size_name}}</label>
+                                                    </li>
+                                                @else
                                                     <li class="color"><input class="size_id" id="size{{$size->size_id}}" type="radio" name="size_id" value="{{$size->size_id}}">
                                                         <label for="size{{$size->size_id}}">{{$size->rel_to_size->size_name}}</label>
                                                     </li>
+                                                @endif  
+                                                   
                                                 @endforeach
                                             </ul>
                                             @error('size_id')
