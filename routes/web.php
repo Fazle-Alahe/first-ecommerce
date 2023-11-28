@@ -149,6 +149,9 @@ Route::get('/cart/remove/{id}', [CartController::class, 'cart_remove'])->name('c
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart/update/', [CartController::class, 'cart_update'])->name('cart.update');
 
+// Coupon
+
+
 
 
 

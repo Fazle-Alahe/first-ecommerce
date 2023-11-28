@@ -78,15 +78,15 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td class="ptice">&#2547;{{$cart->rel_to_product->after_discount}}</td>
-                                            <td class="td-quantity">
-                                                <div class="quantity cart-plus-minus">
+                                            <td class="ptice cart_s">&#2547;{{$cart->rel_to_product->after_discount}}</td>
+                                            <td class="td-quantity cart_s">
+                                                <div class="quantity">
                                                     <input class="text-value" name="quantity[{{$cart->id}}]" type="text" value="{{$cart->quantity}}">
-                                                    <div class="dec qtybutton">-</div>
-                                                    <div class="inc qtybutton">+</div>
+                                                    <div class="dec qtybutton" data-price="{{$cart->rel_to_product->after_discount}}">-</div>
+                                                    <div class="inc qtybutton" data-price="{{$cart->rel_to_product->after_discount}}">+</div>
                                                 </div>
                                             </td>
-                                            <td class="ptice">&#2547;{{$cart->rel_to_product->after_discount * $cart->quantity}}</td>
+                                            <td class="ptice cart_s">&#2547;{{$cart->rel_to_product->after_discount * $cart->quantity}}</td>
                                             <td class="action">
                                                 <ul>
                                                     <li class="w-btn"><a data-bs-toggle="tooltip"
@@ -251,5 +251,29 @@
     </div>
 </div>
 <!-- cart-area end -->
+@endsection
 
+@section('footer_script')
+    <script>
+        $('.inc').click(function(){
+            var td = document.getElementsByClassName('cart_s');
+            var array = Array.from(td);
+            array.map((item)=>{
+                item.addEventListener('click', function(e){
+                    if(e.target.className == 'inc qtybutton'){
+                        var price = e.target.dataset.price
+                        var quantity = e.target.parentElement.firstElementChild.value
+                        var sub = price*quantity
+                        var subtotal = item.nextElementSibling.innerHTML = "&#2547;"+sub;
+                    }
+                    if(e.target.className == 'dec qtybutton'){
+                        var price = e.target.dataset.price
+                        var quantity = e.target.parentElement.firstElementChild.value
+                        var sub = price*quantity
+                        var subtotal = item.nextElementSibling.innerHTML = "&#2547;"+sub;
+                    }
+                })
+            });
+        })
+    </script>
 @endsection
