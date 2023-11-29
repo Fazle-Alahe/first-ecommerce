@@ -4,6 +4,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
@@ -150,7 +151,9 @@ Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart/update/', [CartController::class, 'cart_update'])->name('cart.update');
 
 // Coupon
-
+Route::get('/coupon', [CouponController::class, 'coupon'])->name('coupon');
+Route::post('/add/coupon/', [CouponController::class, 'add_coupon'])->name('add.coupon');
+Route::get('/coupon/status/{id}', [CouponController::class, 'coupon_status'])->name('coupon.status');
 
 
 

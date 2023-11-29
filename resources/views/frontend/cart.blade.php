@@ -116,10 +116,12 @@
                     </form>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <div class="apply-area mb-3">
-                        <input type="text" class="form-control" placeholder="Enter your coupon">
-                        <button class="theme-btn-s2" type="submit">Apply</button>
-                    </div>
+                    <form action="{{route('cart')}}" method="GET">
+                        <div class="apply-area mb-3">
+                            <input type="text" class="form-control" name="coupon" placeholder="Enter your coupon">
+                            <button class="theme-btn-s2" type="submit">Apply</button>
+                        </div>
+                    </form>
                     <div class="cart-total-wrap">
                         <h3>Cart Totals</h3>
                         <div class="sub-total">

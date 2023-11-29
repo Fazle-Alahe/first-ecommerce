@@ -30,7 +30,7 @@ class CartController extends Controller
         return back();
     }
 
-    function cart(){
+    function cart(Request $request){
         $carts = Cart::where('customer_id', Auth::guard('customer')->id())->get();
         return view('frontend.cart',[
             'carts' => $carts,
