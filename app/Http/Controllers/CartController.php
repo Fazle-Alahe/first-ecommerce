@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,9 +32,39 @@ class CartController extends Controller
     }
 
     function cart(Request $request){
+        $coupon = $request->coupon;
+
+        $msg = '';
+        $type = '';
+        $amount = 0;
+
+        if(Coupon::where('coupon', $coupon)->exists()){
+            if(Coupon::where('coupon', $coupon)->where('limit', '!=', 0)->exists()){
+                if(Carbon::now()->format('Y-m-d') <= Coupon::where('coupon', $coupon)->first()->validity){
+                    $type = Coupon::where('coupon', $coupon)->first()->type;
+                    $amount = Coupon::where('coupon', $coupon)->first()->amount;
+                }
+                else{
+                    $msg = 'Coupon Expired!';
+                    $amount = 0;
+                }
+            }
+            else{
+                $msg = 'Coupon Limit Exceed!';
+                $amount = 0;
+            }
+        }
+        else{
+            $msg = 'Coupon Does Not Exists';
+            $amount = 0;
+        }
+
         $carts = Cart::where('customer_id', Auth::guard('customer')->id())->get();
         return view('frontend.cart',[
             'carts' => $carts,
+            'msg' => $msg,
+            'amount' => $amount,
+            'type' => $type,
         ]);
     }
 
