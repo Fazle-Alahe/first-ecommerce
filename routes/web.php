@@ -4,6 +4,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
@@ -155,6 +156,8 @@ Route::get('/coupon', [CouponController::class, 'coupon'])->name('coupon');
 Route::post('/add/coupon/', [CouponController::class, 'add_coupon'])->name('add.coupon');
 Route::get('/coupon/status/{id}', [CouponController::class, 'coupon_status'])->name('coupon.status');
 
+// Checkout
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
 
 

@@ -151,7 +151,13 @@
                             <h4>Total</h4>
                             <span>&#2547;{{$total}}</span>
                         </div>
-                        <a class="theme-btn-s2" href="checkout.html">Proceed To CheckOut</a>
+                        @php
+                            session([
+                                'discount' => $final_discount,
+                                'total' => $total,
+                            ])
+                        @endphp
+                        <a class="theme-btn-s2" href="{{route('checkout')}}">Proceed To CheckOut</a>
                     </div>
                 </div>
             </div>

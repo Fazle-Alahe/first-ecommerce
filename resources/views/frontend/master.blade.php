@@ -97,7 +97,7 @@
                                 @php
                                     $logo = App\Models\Logo::first();
                                 @endphp
-                                <a class="navbar-brand" href="index.html"><img src="{{asset('uploads/logo/logo.svg')}}" alt="logo"></a>
+                                <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('uploads/logo/logo.svg')}}" alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
