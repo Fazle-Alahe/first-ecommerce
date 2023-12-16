@@ -298,5 +298,6 @@
                 })
             });
         })
+
     </script>
 @endsection

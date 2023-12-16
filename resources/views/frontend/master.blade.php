@@ -23,6 +23,22 @@
     <link href="{{asset('frontend')}}/css/jquery.fancybox.css" rel="stylesheet">
     <link href="{{asset('frontend')}}/css/odometer-theme-default.css" rel="stylesheet">
     <link href="{{asset('frontend')}}/sass/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container {
+            margin: 16px 0;
+        }
+        .select2-container--default .select2-selection--single {
+            height: 40px;
+            border: 1px solid #D9D9D9;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 40px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 38px;
+        }
+    </style>
 </head>
 
 <body>
@@ -454,6 +470,7 @@
     <!-- Custom script for this template -->
     <script src="{{asset('frontend')}}/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @yield('footer_script')
 </body>
 </html>

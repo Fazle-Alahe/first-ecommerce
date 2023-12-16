@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontendController::class, 'welcome'])->name('index');
 
+
 Route::get('/dashboard',[HomeController::class, 'dashboard'] )->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/product/details/{slug}',[FrontendController::class, 'product_details'])->name('product.details');
 Route::get('/all/products/',[FrontendController::class, 'all_products'])->name('all.products');
@@ -158,6 +159,8 @@ Route::get('/coupon/status/{id}', [CouponController::class, 'coupon_status'])->n
 
 // Checkout
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/getCity', [CheckoutController::class, 'getCity'])->name('getCity');
+Route::post('/order/store/', [CheckoutController::class, 'order_store'])->name('order.store');
 
 
 

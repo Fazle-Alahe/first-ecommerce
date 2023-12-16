@@ -30,7 +30,8 @@
                     </div>
                 </div>
             </div>
-            <form>
+            <form action="{{route('order.store')}}" method="POST">
+                @csrf
                 <div class="checkout-wrap">
                     <div class="row">
                         <div class="col-lg-8 col-12">
@@ -44,50 +45,69 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="First Name*" id="fname1"
-                                                        name="fname">
+                                                        name="fname" value="{{Auth::guard('customer')->user()->fname}}">
+                                                    @error('fname')
+                                                        <strong class="text-danger">First Name is required.</strong>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="Last Name*" id="fname2"
-                                                        name="fname">
+                                                        name="lname" value="{{Auth::guard('customer')->user()->lname}}">
+                                                    @error('lname')
+                                                        <strong class="text-danger">Last Name is required.</strong>
+                                                    @enderror
                                                 </div>
-                                                <div class="col-lg-6 col-md-12 col-12">
-                                                    <select name="address" id="Country" class="form-control">
-                                                        <option disabled="" selected="">Country*</option>
-                                                        <option>United State</option>
-                                                        <option>Bangladesh</option>
-                                                        <option>India</option>
-                                                        <option>Srilanka</option>
-                                                        <option>Pakisthan</option>
-                                                        <option>Afgansthan</option>
+                                                <div class="col-lg-6 col-md-12 col-12 aaa">
+                                                    <select name="country" id="Country" class="form-control country">
+                                                        <option disabled="" selected="">Select Country*</option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{$country->id}}">{{$country->name}}</option>
+                                                        @endforeach
+                                                        @error('country')
+                                                            <strong class="text-danger">Country is required.</strong>
+                                                        @enderror
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
-                                                    <input type="text" placeholder="City / Town*" id="City"
-                                                        name="City">
+                                                    <select name="city" id="City" class="form-control city" >
+                                                        <option value="">Select City*</option>
+                                                    </select>
+                                                    @error('city')
+                                                        <strong class="text-danger">City is required.</strong>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="Postcode / ZIP*" id="Post2"
-                                                        name="Post">
+                                                        name="zip" value="{{Auth::guard('customer')->user()->zip}}">
+                                                    @error('zip')
+                                                        <strong class="text-danger">Zip is required.</strong>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="Company Name*" id="Company"
-                                                        name="Company">
+                                                        name="company">
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="Email Address*" id="email4"
-                                                        name="email">
+                                                        name="email" value="{{Auth::guard('customer')->user()->email}}">
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
-                                                    <input type="text" placeholder="Phone*" id="email2"
-                                                        name="email">
+                                                    <input type="text" placeholder="Phone*" id="phone"
+                                                        name="phone" value="{{Auth::guard('customer')->user()->phone}}">
+                                                    @error('phone')
+                                                        <strong class="text-danger">Phone number is required.</strong>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-12">
                                                     <input type="text" placeholder="Address*" id="Adress"
-                                                        name="Adress">
+                                                        name="address" value="{{Auth::guard('customer')->user()->address}}">
+                                                    @error('address')
+                                                        <strong class="text-danger">Address is required.</strong>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-12">
                                                     <div class="note-area">
-                                                        <textarea name="massage"
+                                                        <textarea name="notes"
                                                             placeholder="Additional Information"></textarea>
                                                     </div>
                                                 </div>
@@ -103,46 +123,44 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="First Name*" id="fname6"
-                                                            name="fname">
+                                                            name="ship_fname">
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Last Name*" id="fname7"
-                                                            name="fname">
+                                                            name="ship_lname">
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
-                                                        <select name="address" id="Country2" class="form-control">
-                                                            <option disabled="" selected="">Country*</option>
-                                                            <option>United State</option>
-                                                            <option>Bangladesh</option>
-                                                            <option>India</option>
-                                                            <option>Srilanka</option>
-                                                            <option>Pakisthan</option>
-                                                            <option>Afgansthan</option>
+                                                        <select name="ship_country" id="Country2" class="form-control country2" style="width: 100%">
+                                                            <option disabled="" selected="">Select Country*</option>
+                                                            @foreach ($countries as $country)
+                                                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
-                                                        <input type="text" placeholder="City / Town*" id="City1"
-                                                            name="City">
+                                                        <select name="ship_city" id="City2" class="form-control city2" style="width: 100%">
+                                                            <option value="">Select City*</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Postcode / ZIP*" id="Post1"
-                                                            name="Post">
+                                                            name="ship_zip">
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Company Name*" id="Company1"
-                                                            name="Company">
+                                                            name="ship_company">
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Email Address*" id="email5"
-                                                            name="email">
+                                                            name="ship_email">
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Phone*" id="phone1"
-                                                            name="email">
+                                                            name="ship_phone">
                                                     </div>
                                                     <div class="col-lg-12 col-md-12 col-12">
                                                         <input type="text" placeholder="Address*" id="Adress1"
-                                                            name="Adress">
+                                                            name="ship_address">
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,7 +180,7 @@
                                         <div class="oreder-product">
                                             <div class="images">
                                                 <span>
-                                                    <img src="{{asset('uploads/product/preview/')}}/{{$cart->rel_to_product->preview}}" alt="">
+                                                    <img src="{{asset('uploads/product/preview/')}}/{{$cart->rel_to_product->prev_img}}" alt="">
                                                 </span>
                                             </div>
                                             &nbsp; &nbsp;
@@ -194,13 +212,16 @@
                                         </div>
                                         <ul>
                                             <li class="free">
-                                                <input data-charge="{{session('total')}}" id="Free" class="charge" type="radio" name="charge" value="70">
+                                                <input data-charge="{{session('total')}}" id="Free" class="charge" type="radio" name="delivery_charge" value="70">
                                                 <label for="Free">Inside City: <span>&#2547;70</span></label>
                                             </li>
                                             <li class="free">
-                                                <input data-charge="{{session('total')}}" id="Local" class="charge" type="radio" name="charge" value="100">
+                                                <input data-charge="{{session('total')}}" id="Local" class="charge" type="radio" name="delivery_charge" value="100">
                                                 <label for="Local">Outside City: <span>&#2547;100</span></label>
                                             </li>
+                                            @error('delivery_charge')
+                                                <strong class="text-danger">Select your delivery charge option.</strong>
+                                            @enderror
                                         </ul>
                                     </div>
                                     <div class="title s2">
@@ -217,21 +238,26 @@
                                                 <div class="payment-select">
                                                     <ul>
                                                         <li class="">
-                                                            <input id="remove" type="radio" name="payment"
-                                                                value="30">
+                                                            <input id="remove" type="radio" name="payment_method"
+                                                                value="1">
                                                             <label for="remove">Cash on Delivery</label>
                                                         </li>
                                                         <li class="">
-                                                            <input id="add" type="radio" name="payment" checked="checked" value="30">
+                                                            <input id="add" type="radio" name="payment_method" value="2">
                                                             <label for="add">Pay With SSLCOMMERZ</label>
                                                         </li>
                                                         <li class="">
-                                                            <input id="getway" type="radio" name="payment"
-                                                                value="30">
+                                                            <input id="getway" type="radio" name="payment_method"
+                                                                value="3">
                                                             <label for="getway">Pay With STRIPE</label>
                                                         </li>
+                                                        @error('payment_method')
+                                                            <strong class="text-danger">Select your delivery method.</strong>
+                                                        @enderror
                                                     </ul>
                                                 </div>
+                                                <input type="hidden" name="discount" value="{{session('discount')}}">
+                                                <input type="hidden" name="total" value="{{session('total')}}">
                                                 <div id="open6" class="payment-name active">
                                                     <div class="contact-form form-style">
                                                         <div class="row">
@@ -263,6 +289,58 @@
             var total = $(this).attr('data-charge')
             var total = parseInt(total)+parseInt(charge)
             $('#total').html(total)
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#Country').select2();
+            $('#Country2').select2();
+            $('#City').select2();
+            $('#City2').select2();
+        });
+    </script>
+
+    <script>
+        $('.country').change(function() {
+            let country_id = $(this).val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'/getCity',
+                type: 'POST',
+                data:{'country_id': country_id},
+
+                success:function(data){
+                    $('.city').html(data);
+                }
+            });
+
+        })
+    </script>
+
+    <script>
+        $('.country2').change(function() {
+            let country_id = $(this).val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'/getCity',
+                type: 'POST',
+                data:{'country_id': country_id},
+
+                success:function(data){
+                    $('.city2').html(data);
+                }
+            });
+
         })
     </script>
 @endsection
