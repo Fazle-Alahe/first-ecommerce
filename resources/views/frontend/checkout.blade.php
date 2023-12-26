@@ -116,7 +116,7 @@
                                     </div>
                                     
                                     <div class="biling-item-3">
-                                        <input id="toggle4" type="checkbox">
+                                        <input id="toggle4" type="checkbox" name="ship_check" value="1">
                                         <label class="fontsize" for="toggle4">Ship to a Different Address?</label>
                                         <div class="billing-adress" id="open4">
                                             <div class="contact-form form-style">
@@ -131,7 +131,7 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <select name="ship_country" id="Country2" class="form-control country2" style="width: 100%">
-                                                            <option disabled="" selected="">Select Country*</option>
+                                                            <option >Select Country*</option>
                                                             @foreach ($countries as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}</option>
                                                             @endforeach

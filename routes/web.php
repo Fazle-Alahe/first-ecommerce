@@ -161,6 +161,7 @@ Route::get('/coupon/status/{id}', [CouponController::class, 'coupon_status'])->n
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::post('/getCity', [CheckoutController::class, 'getCity'])->name('getCity');
 Route::post('/order/store/', [CheckoutController::class, 'order_store'])->name('order.store');
+Route::get('/order/success/', [CheckoutController::class, 'order_success'])->name('order.success');
 
 
 
