@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
-                    <tr>
+                    <tr class="text-center">
                         <th>SL</th>
                         <th>Order ID</th>
                         <th>Total</th>
@@ -17,7 +17,7 @@
                         <th>Action</th>
                     </tr>
                     @foreach ($orders as $sl=>$order )
-                        <tr>
+                        <tr class="text-center">
                             <td>{{$sl+1}}</td>
                             <td>{{$order->order_id}}</td>
                             <td>&#2547;{{$order->total}}</td>
@@ -49,7 +49,7 @@
                                                 <button name="status" value="1" class="dropdown-item bg-{{$order->status == 1?'secondary':''}}">Processing</button>
                                                 <button name="status" value="2" class="dropdown-item bg-{{$order->status == 2?'secondary':''}}">Shipping</button>
                                                 <button name="status" value="3" class="dropdown-item bg-{{$order->status == 3?'secondary':''}}">Ready for Deliver</button>
-                                                <button name="status" value="4" class="dropdown-item bg-{{$order->status == 4?'secondary':''}}">Received</button>
+                                                <button name="status" value="4" class="dropdown-item bg-{{$order->status == 4?'secondary':''}}">Delivered</button>
                                                 <button name="status" value="5" class="dropdown-item bg-{{$order->status == 5?'secondary':''}}">Cancel</button>
                                             </div>
                                         </div>

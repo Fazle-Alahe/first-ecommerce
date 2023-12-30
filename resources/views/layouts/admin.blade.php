@@ -125,16 +125,21 @@ License: You must have a valid license purchased only from above link or https:/
   }
 
    /* order */
-        .status_c {
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-        .abc{
-            padding: 5px;
-            border-radius: 3px;
-        }
+    .status_c {
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+    .abc{
+        padding: 5px;
+        border-radius: 3px;
+    }
+
+    .swal2-popup.swal2-toast.swal2-show {
+      background-color: rgb(25, 143, 14);
+      color: white;
+    }
 </style>
 </head>
 <body>
