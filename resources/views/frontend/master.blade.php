@@ -38,6 +38,18 @@
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 38px;
         }
+        
+        /* my order */
+        .status_c {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .abc{
+            padding: 5px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 

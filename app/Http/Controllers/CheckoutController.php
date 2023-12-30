@@ -121,7 +121,7 @@ class CheckoutController extends Controller
                     'quantity' => $cart->quantity,
                     'created_at' => Carbon::now(),
                 ]);
-                // Cart::find($cart->id)->delete();
+                Cart::find($cart->id)->delete();
                 Inventory::where('product_id', $cart->product_id)->where('color_id', $cart->color_id)->where('size_id', $cart->size_id)->decrement('quantity', $cart->quantity);
             }
 

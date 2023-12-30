@@ -123,6 +123,18 @@ License: You must have a valid license purchased only from above link or https:/
     border-radius: 5px;
     width: 90%;
   }
+
+   /* order */
+        .status_c {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .abc{
+            padding: 5px;
+            border-radius: 3px;
+        }
 </style>
 </head>
 <body>
@@ -269,6 +281,13 @@ License: You must have a valid license purchased only from above link or https:/
             <a class="nav-link" href="{{route('coupon')}}">
               <i class="link-icon" data-feather="feather"></i>
               <span class="link-title">Coupon</span>
+              <i class="link-arrow"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('orders')}}">
+              <i class="link-icon" data-feather="feather"></i>
+              <span class="link-title">Orders</span>
               <i class="link-arrow"></i>
             </a>
           </li>

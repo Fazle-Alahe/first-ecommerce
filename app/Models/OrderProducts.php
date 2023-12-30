@@ -12,4 +12,8 @@ class OrderProducts extends Model
     function rel_to_product(){
         return $this->belongsTo(Product::class, 'product_id');
     }
+    function orders(){
+        return $this->hasOne(Order::class, 'order_id');
+    }
+    
 }

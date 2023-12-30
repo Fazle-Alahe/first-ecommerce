@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderProducts;
+use App\Models\Shipping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class CustomerController extends Controller
 {
@@ -92,5 +96,24 @@ class CustomerController extends Controller
                 return back();
             }
         }
+    }
+
+    function my_orders(){
+        $orders = Order::where('customer_id', Auth::guard('customer')->id())->with('rel_to_order_products')->latest()->get();
+        // return $orders;
+        return view('frontend.customer.my_orders',[
+            'orders' => $orders,
+            // 'order_product' => $order_product,
+        ]);
+    }
+
+    function download_invoice($id){
+        $orders = Order::find($id);
+
+        $pdf = PDF::loadView('frontend.customer.download_invoice',[
+            'order_id' => $orders->order_id,
+        ]);
+    
+        return $pdf->download('myorders.pdf');
     }
 }
