@@ -51,22 +51,39 @@
                                                 <td class="">&#2547;{{$order->total}}</td>
                                                 <td class="status_c">
                                                     @if ($order->status == 0)
-                                                        <span class="bg-secondary abc">Placed</span>
+                                                        <span class="secondary abc">Placed</span>
                                                     @elseif ($order->status == 1)
-                                                        <span class="bg-primary abc">Processing</span>
+                                                        <span class="bluuee abc">Processing</span>
                                                     @elseif ($order->status == 2)
-                                                        <span class="bg-warning abc">Shipping</span>
+                                                        <span class="yellloww abc">Shipping</span>
                                                     @elseif ($order->status == 3)
-                                                        <span class="bg-info abc">Ready for Deliver</span>
+                                                        <span class="skybluee abc">Ready for Deliver</span>
                                                     @elseif ($order->status == 4)
-                                                        <span class="bg-success abc">Received</span>
+                                                        <span class="greeenn abc">Received</span>
                                                     @elseif ($order->status == 5)
-                                                        <span class="bg-danger abc">Cancel</span>
+                                                        <span class="reedd abc">Cancel</span>
+                                                    @elseif ($order->status == 6)
+                                                        <span class="reedd abc">Return</span>
                                                     @endif
                                                     
                                                 </td>
                                                 <td>
-                                                    <a href="{{route('download.invoice', $order->id)}}" class="btn btn-info">Download Invoice</a>
+                                                    @if ($order->status == 5)
+                                                        <a class="btn reedd">Cancled</a>
+                                                    @elseif ($order->status == 6)
+                                                        <a class="btn reedd">Returned</a>
+                                                    @elseif (App\Models\OrderCancel::where('order_id', $order->id)->exists())
+                                                        <a class="btn yellloww">Cancel Request Pending</a>
+                                                    @elseif (App\Models\OrderReturn::where('order_id', $order->id)->exists())
+                                                        <a class="btn rtnprocess">Return Processing</a>
+                                                    @else
+                                                        <a href="{{route('download.invoice', $order->id)}}" class="btn skybluee">Download Invoice</a>
+                                                        @if ($order->status == 4)
+                                                            <a href="{{route('order.return', $order->id)}}" class="btn returnn">Return</a>
+                                                        @else
+                                                            <a href="{{route('cancel.order', $order->id)}}" class="btn reedd">Cancel Order</a>
+                                                        @endif
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @empty
@@ -83,4 +100,49 @@
     </div>
 </div>
 <!-- order-area end -->
+@endsection
+
+
+@section('footer_script')
+    
+@if (session('req'))
+<script>
+    const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+
+    Toast.fire({
+    icon: 'success',
+    title: '{{session('req')}}'
+    })
+</script>
+@endif
+@if (session('return'))
+<script>
+    const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+
+    Toast.fire({
+    icon: 'success',
+    title: '{{session('return')}}'
+    })
+</script>
+@endif
 @endsection

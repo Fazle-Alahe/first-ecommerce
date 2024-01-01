@@ -50,6 +50,43 @@
             padding: 5px;
             border-radius: 3px;
         }
+
+        /* frontend button design color */
+        .yellloww {
+            background: linear-gradient(180deg, #FED700 0%, #F78914 100%);
+            color: white;
+        }
+        .greeenn {
+            background: linear-gradient(180deg, #95CD2F 0%, #63911F 100%);
+            color: white;
+        }
+        .reedd {
+            background: linear-gradient(180deg, #b1452af0 0%, rgb(250, 4, 4) 100%);
+            color: white;
+        }
+        .skybluee {
+            
+            background: linear-gradient(180deg, #5df3f3 0%, #047281 100%);
+            color: white;
+        }
+        .bluuee {
+            
+            background: linear-gradient(180deg, #729bd8 0%, #3307ad 100%);
+            color: white;
+        }
+        .returnn {
+            
+            background: linear-gradient(180deg, #e352bc 0%, #850467 100%);
+            color: white;
+        }
+      .secondary {
+          background: linear-gradient(180deg, #96969c 0%, #53535b 100%);
+          color: white;
+      }
+      .rtnprocess {
+          background: linear-gradient(180deg, #d895c6 0%, #6e4269 100%);
+          color: white;
+      }
     </style>
 </head>
 

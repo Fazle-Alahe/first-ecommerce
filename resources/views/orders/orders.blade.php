@@ -24,24 +24,26 @@
                             <td>{{$order->created_at->diffForHumans()}}</td>
                             <td class="status_c">
                                 @if ($order->status == 0)
-                                    <span class="bg-secondary abc">Placed</span>
+                                    <span class="secondary abc">Placed</span>
                                 @elseif ($order->status == 1)
-                                    <span class="bg-primary abc">Processing</span>
+                                    <span class="bluuee abc">Processing</span>
                                 @elseif ($order->status == 2)
-                                    <span class="bg-warning abc">Shipping</span>
+                                    <span class="yellloww abc">Shipping</span>
                                 @elseif ($order->status == 3)
-                                    <span class="bg-info abc">Ready for Deliver</span>
+                                    <span class="skybluee abc">Ready for Deliver</span>
                                 @elseif ($order->status == 4)
-                                    <span class="bg-success abc">Delivered</span>
+                                    <span class="greeenn abc">Delivered</span>
                                 @elseif ($order->status == 5)
-                                    <span class="bg-danger abc">Cancel</span>
+                                    <span class="reedd abc">Cancel</span>
+                                @elseif ($order->status == 6)
+                                    <span class="reedd abc">Return</span>
                                 @endif
                             </td>
                             <td>
                                 <form action="{{route('order.status.update',$order->id,$order->order_id)}}" method="POST">
                                     @csrf
                                         <div class="dropdown">
-                                            <button {{$order->status == 5?'disabled':''}} class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
                                                 Change Status
                                             </button>
                                             <div class="dropdown-menu">
@@ -50,7 +52,6 @@
                                                 <button name="status" value="2" class="dropdown-item bg-{{$order->status == 2?'secondary':''}}">Shipping</button>
                                                 <button name="status" value="3" class="dropdown-item bg-{{$order->status == 3?'secondary':''}}">Ready for Deliver</button>
                                                 <button name="status" value="4" class="dropdown-item bg-{{$order->status == 4?'secondary':''}}">Delivered</button>
-                                                <button name="status" value="5" class="dropdown-item bg-{{$order->status == 5?'secondary':''}}">Cancel</button>
                                             </div>
                                         </div>
                                 </form>
