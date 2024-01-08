@@ -47,14 +47,14 @@
                                                     <input type="text" placeholder="First Name*" id="fname1"
                                                         name="fname" value="{{Auth::guard('customer')->user()->fname}}">
                                                     @error('fname')
-                                                        <strong class="text-danger">First Name is required.</strong>
+                                                        <strong class="text-danger">First name is required.</strong>
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="Last Name*" id="fname2"
                                                         name="lname" value="{{Auth::guard('customer')->user()->lname}}">
                                                     @error('lname')
-                                                        <strong class="text-danger">Last Name is required.</strong>
+                                                        <strong class="text-danger">Last name is required.</strong>
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12 aaa">
@@ -64,7 +64,7 @@
                                                             <option value="{{$country->id}}">{{$country->name}}</option>
                                                         @endforeach
                                                         @error('country')
-                                                            <strong class="text-danger">Country is required.</strong>
+                                                            <strong class="text-danger">Country name is required.</strong>
                                                         @enderror
                                                     </select>
                                                 </div>
@@ -73,14 +73,14 @@
                                                         <option value="">Select City*</option>
                                                     </select>
                                                     @error('city')
-                                                        <strong class="text-danger">City is required.</strong>
+                                                        <strong class="text-danger">City name is required.</strong>
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <input type="text" placeholder="Postcode / ZIP*" id="Post2"
                                                         name="zip" value="{{Auth::guard('customer')->user()->zip}}">
                                                     @error('zip')
-                                                        <strong class="text-danger">Zip is required.</strong>
+                                                        <strong class="text-danger">Zip code is required.</strong>
                                                     @enderror
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
@@ -124,16 +124,25 @@
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="First Name*" id="fname6"
                                                             name="ship_fname">
+                                                            @error('ship_fname')
+                                                                <strong class="text-danger">First name is required.</strong>
+                                                            @enderror
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Last Name*" id="fname7"
                                                             name="ship_lname">
+                                                            @error('ship_lname')
+                                                                <strong class="text-danger">Last name is required.</strong>
+                                                            @enderror
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <select name="ship_country" id="Country2" class="form-control country2" style="width: 100%">
                                                             <option >Select Country*</option>
                                                             @foreach ($countries as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}</option>
+                                                                @error('ship_country')
+                                                                    <strong class="text-danger">Country name is required.</strong>
+                                                                @enderror
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -141,10 +150,16 @@
                                                         <select name="ship_city" id="City2" class="form-control city2" style="width: 100%">
                                                             <option value="">Select City*</option>
                                                         </select>
+                                                        @error('ship_city')
+                                                            <strong class="text-danger">City name is required.</strong>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Postcode / ZIP*" id="Post1"
                                                             name="ship_zip">
+                                                            @error('ship_zip')
+                                                                <strong class="text-danger">Zip code is required.</strong>
+                                                            @enderror
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Company Name*" id="Company1"
@@ -157,10 +172,16 @@
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <input type="text" placeholder="Phone*" id="phone1"
                                                             name="ship_phone">
+                                                            @error('ship_phone')
+                                                                <strong class="text-danger">Phone number is required.</strong>
+                                                            @enderror
                                                     </div>
                                                     <div class="col-lg-12 col-md-12 col-12">
                                                         <input type="text" placeholder="Address*" id="Adress1"
                                                             name="ship_address">
+                                                            @error('ship_address')
+                                                                <strong class="text-danger">Address is required.</strong>
+                                                            @enderror
                                                     </div>
                                                 </div>
                                             </div>

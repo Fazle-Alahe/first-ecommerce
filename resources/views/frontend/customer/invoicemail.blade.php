@@ -265,7 +265,7 @@ footer {
             @foreach ($order_products as $sl=>$order_product)
             <tr>
                 <td class="no">{{$sl+1}}</td>
-                <td class="desc">{{$order_product->rel_to_product->first()->product_name}}</td>
+                <td class="desc">{{$order_product->rel_to_product->product_name}}</td>
                 <td class="unit">&#2547;{{$order_product->price}}</td>
                 <td class="qty">{{$order_product->quantity}}</td>
                 <td class="total">&#2547;{{$order_product->price*$order_product->quantity}}</td>

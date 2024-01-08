@@ -516,7 +516,7 @@ License: You must have a valid license purchased only from above link or https:/
 							</a>
 							<div class="dropdown-menu" aria-labelledby="notificationDropdown">
 								<div class="dropdown-header d-flex align-items-center justify-content-between">
-									<p class="mb-0 font-weight-medium">6 New Notifications</p>
+									<p class="mb-0 font-weight-medium">{{App\Models\OrderCancel::all()->count()}} New Notifications</p>
 									<a href="javascript:;" class="text-muted">Clear all</a>
 								</div>
 								<div class="dropdown-body">
@@ -531,7 +531,7 @@ License: You must have a valid license purchased only from above link or https:/
                   @endforeach
 								</div>
 								<div class="dropdown-footer d-flex align-items-center justify-content-center">
-									<a href="javascript:;">View all</a>
+									<a href="{{route('order.cancel.list')}}">View all</a>
 								</div>
 							</div>
 						</li>

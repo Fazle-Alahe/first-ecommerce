@@ -50,35 +50,47 @@ class CheckoutController extends Controller
         ]);
 
         if($request->payment_method == 1){
+
             $order_id = '#'.uniqid().'-'.Carbon::now()->format('d-m-Y');
-            Order::insert([
-                'order_id' => $order_id,
-                'customer_id' => Auth::guard('customer')->id(),
-                'total' => $request->total + $request->delivery_charge,
-                'subtotal' => $request->total + $request->discount,
-                'discount' => $request->discount,
-                'delivery_charge' => $request->delivery_charge,
-                'payment_method' => $request->payment_method,
-                'created_at' => Carbon::now(),
-            ]);
 
-            Billing::insert([
-                'order_id' => $order_id,
-                'customer_id' => Auth::guard('customer')->id(),
-                'fname' => $request->fname,
-                'lname' => $request->lname,
-                'country_id' => $request->country,
-                'city_id' => $request->city,
-                'zip' => $request->zip,
-                'company' => $request->company,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'notes' => $request->notes,
-                'created_at' => Carbon::now(),
-            ]);
+            if($request->ship_check == 1)
+                {$request->validate([
+                    'ship_fname'=>'required',
+                    'ship_lname'=>'required',
+                    'ship_country'=>'required',
+                    'ship_city'=>'required',
+                    'ship_zip'=>'required',
+                    'ship_phone'=>'required',
+                    'ship_address'=>'required',
+                ]);
+    
+                Order::insert([
+                    'order_id' => $order_id,
+                    'customer_id' => Auth::guard('customer')->id(),
+                    'total' => $request->total + $request->delivery_charge,
+                    'subtotal' => $request->total + $request->discount,
+                    'discount' => $request->discount,
+                    'delivery_charge' => $request->delivery_charge,
+                    'payment_method' => $request->payment_method,
+                    'created_at' => Carbon::now(),
+                ]);
 
-            if($request->ship_check == 1){
+                Billing::insert([
+                    'order_id' => $order_id,
+                    'customer_id' => Auth::guard('customer')->id(),
+                    'fname' => $request->fname,
+                    'lname' => $request->lname,
+                    'country_id' => $request->country,
+                    'city_id' => $request->city,
+                    'zip' => $request->zip,
+                    'company' => $request->company,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                    'notes' => $request->notes,
+                    'created_at' => Carbon::now(),
+                ]);
+
                 Shipping::insert([
                     'order_id' => $order_id,
                     'ship_fname' => $request->ship_fname,
@@ -94,6 +106,33 @@ class CheckoutController extends Controller
                 ]);
             }
             else{
+                Order::insert([
+                    'order_id' => $order_id,
+                    'customer_id' => Auth::guard('customer')->id(),
+                    'total' => $request->total + $request->delivery_charge,
+                    'subtotal' => $request->total + $request->discount,
+                    'discount' => $request->discount,
+                    'delivery_charge' => $request->delivery_charge,
+                    'payment_method' => $request->payment_method,
+                    'created_at' => Carbon::now(),
+                ]);
+    
+                Billing::insert([
+                    'order_id' => $order_id,
+                    'customer_id' => Auth::guard('customer')->id(),
+                    'fname' => $request->fname,
+                    'lname' => $request->lname,
+                    'country_id' => $request->country,
+                    'city_id' => $request->city,
+                    'zip' => $request->zip,
+                    'company' => $request->company,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                    'notes' => $request->notes,
+                    'created_at' => Carbon::now(),
+                ]);
+
                 Shipping::insert([
                     'order_id' => $order_id,
                     'ship_fname' => $request->fname,
@@ -125,7 +164,7 @@ class CheckoutController extends Controller
                 Inventory::where('product_id', $cart->product_id)->where('color_id', $cart->color_id)->where('size_id', $cart->size_id)->decrement('quantity', $cart->quantity);
             }
 
-            // Mail::to($request->email)->send(new InvoiceMail($order_id));
+            Mail::to($request->email)->send(new InvoiceMail($order_id));
 
             return redirect()->route('order.success')->with('success', $order_id);
         }

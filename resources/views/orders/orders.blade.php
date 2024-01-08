@@ -40,10 +40,10 @@
                                 @endif
                             </td>
                             <td>
-                                <form action="{{route('order.status.update',$order->id,$order->order_id)}}" method="POST">
+                                <form action="{{route('order.status.update',$order->id)}}" method="POST">
                                     @csrf
                                         <div class="dropdown">
-                                            <button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
+                                            <button {{$order->status == 5?'disabled':''}} class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
                                                 Change Status
                                             </button>
                                             <div class="dropdown-menu">
@@ -52,6 +52,7 @@
                                                 <button name="status" value="2" class="dropdown-item bg-{{$order->status == 2?'secondary':''}}">Shipping</button>
                                                 <button name="status" value="3" class="dropdown-item bg-{{$order->status == 3?'secondary':''}}">Ready for Deliver</button>
                                                 <button name="status" value="4" class="dropdown-item bg-{{$order->status == 4?'secondary':''}}">Delivered</button>
+                                                <a href="{{route('order.cancel.admin',$order->id)}}" name="status" value="5" class="dropdown-item bg-{{$order->status == 5?'secondary':''}}">Cancel</a>
                                             </div>
                                         </div>
                                 </form>

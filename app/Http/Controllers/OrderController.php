@@ -25,8 +25,8 @@ class OrderController extends Controller
             'status' => $request->status,
         ]);
 
-        // $order = Order::find($id);
-        // $order_products = OrderProducts::where('order_id', $order->order_id)->get();
+        $order = Order::find($id);
+        $order_products = OrderProducts::where('order_id', $order->order_id)->get();
 
         // if($request->status == 5){
         //     foreach($order_products as $order_product){
@@ -159,12 +159,50 @@ class OrderController extends Controller
             'status' => 6,
         ]);
         
-        // $order = Order::find($details->order_id);
-        // $order_products = OrderProducts::where('order_id', $order->order_id)->get();
-        // foreach($order_products as $order_product){
-        //     Inventory::where('product_id', $order_product->product_id)->where('color_id', $order_product->color_id)->where('size_id', $order_product->size_id)->increment('quantity', $order_product->quantity);
-        // }
+        $order = Order::find($details->order_id);
+        $order_products = OrderProducts::where('order_id', $order->order_id)->get();
+        foreach($order_products as $order_product){
+            Inventory::where('product_id', $order_product->product_id)->where('color_id', $order_product->color_id)->where('size_id', $order_product->size_id)->increment('quantity', $order_product->quantity);
+        }
         OrderReturn::find($id)->delete();
         return back()->with('order_return', 'Order Returned!');
     }
+
+    function order_cancel_admin($id){
+        $order_info = Order::find($id);
+        return view('orders.order_cancel_admin',[
+            'order_info' => $order_info,
+        ]);
+    }
+
+    
+    function order_cancel_store_admin(Request $request,$id){
+        
+        $request->validate([
+            'reason' => 'required',
+        ]);
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $extension = $image->extension();
+            $file_name = random_int(10000,90000).'.'.$extension;
+            Image::make($image)->save(public_path('uploads/return_product/'.$file_name));
+
+            OrderCancel::insert([
+                'order_id' => $id,
+                'reason' => $request->reason,
+                'image' => $file_name,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        else{
+            OrderCancel::insert([
+                'order_id' => $id,
+                'reason' => $request->reason,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        
+        return redirect()->route('order.cancel.list')->with('return', 'Return request sent');
+    }
+
 }

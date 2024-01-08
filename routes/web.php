@@ -175,10 +175,12 @@ Route::get('/order/cancel/list', [OrderController::class, 'order_cancel_list'])-
 Route::get('/cancel/details/{id}', [OrderController::class, 'cancel_details'])->name('cancel.details');
 Route::get('/cancel/accept/{id}', [OrderController::class, 'cancel_accept'])->name('cancel.accept');
 Route::get('/order/return/{id}', [OrderController::class, 'order_return'])->name('order.return');
-Route::post('/order/return/store/{id}', [OrderController::class, 'order_return_store'])->name('order.return.store');
 Route::get('/order/returns/list', [OrderController::class, 'order_returns_list'])->name('order.returns.list');
+Route::post('/order/return/store/{id}', [OrderController::class, 'order_return_store'])->name('order.return.store');
 Route::get('/returns/details/{id}', [OrderController::class, 'returns_details'])->name('returns.details');
 Route::get('/returns/accept/{id}', [OrderController::class, 'returns_accept'])->name('returns.accept');
+Route::get('/order/cancel/admin/{id}', [OrderController::class, 'order_cancel_admin'])->name('order.cancel.admin');
+Route::post('/order/cancel/store/admin/{id}', [OrderController::class, 'order_cancel_store_admin'])->name('order.cancel.store.admin');
 
 
 
