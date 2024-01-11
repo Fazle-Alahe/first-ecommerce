@@ -21,8 +21,10 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariationController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -183,6 +185,17 @@ Route::get('/order/cancel/admin/{id}', [OrderController::class, 'order_cancel_ad
 Route::post('/order/cancel/store/admin/{id}', [OrderController::class, 'order_cancel_store_admin'])->name('order.cancel.store.admin');
 
 
+
+// SSLCOMMERZ Start
+Route::get('/pay', [SslCommerzPaymentController::class, 'index'])->name('sslpay');
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
 
 

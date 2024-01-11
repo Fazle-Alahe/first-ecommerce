@@ -137,7 +137,7 @@
                                                     </div>
                                                     <div class="col-lg-6 col-md-12 col-12">
                                                         <select name="ship_country" id="Country2" class="form-control country2" style="width: 100%">
-                                                            <option >Select Country*</option>
+                                                            <option value="">Select Country*</option>
                                                             @foreach ($countries as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}</option>
                                                                 @error('ship_country')
@@ -279,6 +279,7 @@
                                                 </div>
                                                 <input type="hidden" name="discount" value="{{session('discount')}}">
                                                 <input type="hidden" name="total" value="{{session('total')}}">
+                                                <input type="hidden" name="customer_id" value="{{Auth::guard('customer')->id()}}">
                                                 <div id="open6" class="payment-name active">
                                                     <div class="contact-form form-style">
                                                         <div class="row">
