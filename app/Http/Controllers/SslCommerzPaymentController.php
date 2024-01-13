@@ -97,7 +97,7 @@ class SslCommerzPaymentController extends Controller
                 'name' => $data['fname'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
-                'amount' => $data['total'],
+                'amount' => $data['total'] + $data['delivery_charge'],
                 'status' => 'Pending',
                 'address' => $data['address'],
                 'transaction_id' => $post_data['tran_id'],
@@ -221,8 +221,8 @@ class SslCommerzPaymentController extends Controller
             Order::insert([
                 'order_id' => $order_id,
                 'customer_id' => $data->customer_id,
-                'total' => $data->amount + $data->delivery_charge,
-                'subtotal' => $data->total + $data->discount,
+                'total' => $data->amount,
+                'subtotal' => $data->amount + $data->discount - $data->charge,
                 'discount' => $data->discount,
                 'delivery_charge' => $data->charge,
                 'payment_method' => $data->payment_method,
@@ -263,8 +263,8 @@ class SslCommerzPaymentController extends Controller
             Order::insert([
                 'order_id' => $order_id,
                 'customer_id' => $data->customer_id,
-                'total' => $data->amount + $data->delivery_charge,
-                'subtotal' => $data->total + $data->discount,
+                'total' => $data->amount,
+                'subtotal' => $data->amount + $data->discount - $data->charge,
                 'discount' => $data->discount,
                 'delivery_charge' => $data->charge,
                 'payment_method' => $data->payment_method,
@@ -314,7 +314,7 @@ class SslCommerzPaymentController extends Controller
                 'quantity' => $cart->quantity,
                 'created_at' => Carbon::now(),
             ]);
-            // Cart::find($cart->id)->delete();
+            Cart::find($cart->id)->delete();
             Inventory::where('product_id', $cart->product_id)->where('color_id', $cart->color_id)->where('size_id', $cart->size_id)->decrement('quantity', $cart->quantity);
         }
 
