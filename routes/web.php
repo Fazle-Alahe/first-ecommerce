@@ -204,3 +204,6 @@ Route::controller(StripePaymentController::class)->group(function(){
     Route::post('stripe', 'stripePost')->name('stripe.post');
 });
 
+
+// review
+Route::post('/review/store/{id}', [FrontendController::class, 'review_storees'])->name('review.store');

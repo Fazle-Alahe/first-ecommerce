@@ -14,4 +14,8 @@ class Product extends Model
     function rel_to_category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    // function rel_to_order_products(){
+    //     return $this->belongsTo(OrderProducts::class, 'id');
+    // }
 }

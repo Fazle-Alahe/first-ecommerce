@@ -8,11 +8,16 @@ use App\Models\Festival;
 use App\Models\Inventory;
 use App\Models\Offer;
 use App\Models\Offer2;
+use App\Models\OrderProducts;
 use App\Models\Product;
 use App\Models\ProductGallery;
 use App\Models\SpecialOffer;
 use App\Models\SpecialOffer2;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class FrontendController extends Controller
 {
@@ -41,6 +46,7 @@ class FrontendController extends Controller
         $product_id = Product::where('slug', $slug)->first()->id;
         $product_info = Product::find($product_id);
         $galleries = ProductGallery::where('product_id', $product_id)->get();
+        $reviews = OrderProducts::where('product_id', $product_id)->whereNotNull('review')->get();
 
         $available_colors = Inventory::where('product_id', $product_id)
         ->groupBy('color_id')
@@ -57,6 +63,7 @@ class FrontendController extends Controller
             'product_info' => $product_info,
             'available_colors' => $available_colors,
             'available_size' => $available_size,
+            'reviews' => $reviews,
         ]);
     }
 
@@ -96,5 +103,29 @@ class FrontendController extends Controller
             $str = '<strong id="quan" class="btn btn-success">'.$quantity.' In Stock</strong>';
         }
         echo $str;
+    }
+
+    function review_storees(Request $request, $id){
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $extension = $image->extension();
+            $file_name = Str::lower( str_replace(' ', '-', 'review')).'-'.random_int(50000, 60000).'.'.$extension;
+            Image::make($image)->save(public_path('uploads/review/'.$file_name));
+
+            OrderProducts::where('customer_id', Auth::guard('customer')->id())->where('product_id', $id)->first()->update([
+                'review' => $request->review,
+                'stars' => $request->stars,
+                'image' => $file_name,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        else{
+            OrderProducts::where('customer_id', Auth::guard('customer')->id())->where('product_id', $id)->first()->update([
+                'review' => $request->review,
+                'star' => $request->stars,
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        return back()->with('review', 'Review submitted successfully');
     }
 }

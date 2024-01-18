@@ -29,7 +29,7 @@
                     <label for="" class="form-label">Left Image</label>
                     <input type="file" class="form-control" name="left_image"  onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                     <div class="my-2">
-                        <img width="200" id="blah2" src="{{asset('uploads/offer/')}}/{{$festival->first()->left_image}}" alt="">
+                        <img width="200" id="blah" src="{{asset('uploads/offer/')}}/{{$festival->first()->left_image}}" alt="">
                     </div>
                 </div>
                 <div class="mb-3">
