@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('order_access')
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -39,6 +40,7 @@
                                     <span class="reedd abc">Return</span>
                                 @endif
                             </td>
+                            @can('order_action')
                             <td>
                                 <form action="{{route('order.status.update',$order->id)}}" method="POST">
                                     @csrf
@@ -57,6 +59,7 @@
                                         </div>
                                 </form>
                             </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </table>
@@ -64,6 +67,9 @@
         </div>
     </div>
 </div>
+@else
+<h3 class="secondary">You dont have to access this page</h3>
+@endcan  
 @endsection
 
 @section('footer_script')

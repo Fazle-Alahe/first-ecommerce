@@ -195,6 +195,13 @@ License: You must have a valid license purchased only from above link or https:/
               <span class="link-title">Dashboard</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('role.manager')}}">
+              <i class="link-icon" data-feather="feather"></i>
+              <span class="link-title">Role Manager</span>
+              <i class="link-arrow"></i>
+            </a>
+          </li>
           <li class="nav-item nav-category">web apps</li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
@@ -207,7 +214,6 @@ License: You must have a valid license purchased only from above link or https:/
                 <li class="nav-item">
                   <a href="{{route('user.list')}}" class="nav-link">User List</a>
                 </li>
-
               </ul>
             </div>
           </li>

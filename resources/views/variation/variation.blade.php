@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('variation_access')
 <div class="row">
     <div class="col-lg-8">
         <div class="card bg-light">
@@ -22,9 +23,11 @@
                             <td>
                                 <i style="display: inline-block; width: 30px; height: 25px; background: {{$color->color_name == 'NA' ? '' : $color->color_code}}; color: {{$color->color_name == 'NA' ? '' : 'transparent'}};">{{$color->color_name == 'NA' ? $color->color_name : 'Color'}}</i>
                             </td>
+                            @can('color_action')
                             <td>
                                 <a href="{{route('color.delete', $color->id)}}" class="btn btn-danger">Delete</a>
                             </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </table>
@@ -56,9 +59,11 @@
                                         @foreach (App\Models\Size::where('category_id', $category->id)->get() as $size)
                                             <tr>
                                                 <td>{{$size->size_name}}</td>
+                                                @can('size_action')
                                                 <td>
                                                     <a href="{{route('size.delete', $size->id)}}" class="btn btn-danger">Delete</a>
                                                 </td>
+                                                @endcan
                                             </tr>
                                         @endforeach
                                     </table>
@@ -70,6 +75,7 @@
             </div>
         </div>
     </div>
+    @can('color_&_size_add')
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
@@ -130,5 +136,9 @@
             </div>
         </div>
     </div>
+    @endcan
 </div>
+@else
+<h3 class="secondary">You dont have to access this page</h3>
+@endcan  
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('special_offer_access')
 <div class="row">
     <div class="col-lg-6">
         <div class="card">
@@ -93,4 +94,7 @@
         </div>
     </div>
 </div>
+@else
+<h3 class="secondary">You dont have to access this page</h3>
+@endcan  
 @endsection

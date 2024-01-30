@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('order_return')
 <div class="row">
     <div class="col-lg-8 m-auto">
         <div class="card">
@@ -17,10 +18,12 @@
                         <tr>
                             <td>{{$sl+1}}</td>
                             <td>{{App\Models\Order::find($order_return_list->order_id)->order_id}}</td>
+                            @can('order_return_action')
                             <td>
                                 <a href="{{route('returns.details', $order_return_list->id)}}" class="btn skybluee">View</a>
                                 <a href="{{route('returns.accept', $order_return_list->id)}}" class="btn greeenn">Accept</a>
                             </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </table>
@@ -28,6 +31,9 @@
         </div>
     </div>
 </div>
+@else
+<h3 class="secondary">You dont have to access this page</h3>
+@endcan  
 @endsection
 
 

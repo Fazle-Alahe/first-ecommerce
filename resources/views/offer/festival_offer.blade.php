@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('festival_offer_access')
 <div class="col-lg-6 m-auto">
     <div class="card">
         <div class="card-header">
@@ -46,4 +47,7 @@
         </div>
     </div>
 </div>
+@else
+<h3 class="secondary">You dont have to access this page</h3>
+@endcan  
 @endsection

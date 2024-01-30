@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('product_list')
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -29,11 +30,14 @@
                         <td>
                             <img src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
                         </td>
+                        @can('product_status')
                         <td>
                             <div class="toggle">
                                 <input type="checkbox" {{$product->status == 1 ? 'checked':''}} class="status" data-id="{{$product->id}}" data-toggle="toggle" value="{{$product->status}}">
                             </div>
                         </td>
+                        @endcan
+                        @can('product_action')
                         <td>
                             <a href="{{route('inventory', $product->id)}}" class="btn btn-info btn-icon">
                                 <i data-feather="layers"></i>
@@ -45,6 +49,7 @@
                                 <i data-feather="trash"></i>
                             </a>
                         </td>
+                        @endcan
                     @endforeach
                     </tr>
                 </table>
@@ -52,6 +57,9 @@
         </div>
     </div>
 </div>
+@else
+<h3 class="secondary">You dont have to access this page</h3>
+@endcan  
 @endsection
 
 @section('css_cdn')

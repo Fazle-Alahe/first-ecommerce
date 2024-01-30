@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@can('order_cancel')
 <div class="row">
     <div class="col-lg-8 m-auto">
         <div class="card">
@@ -17,10 +18,12 @@
                         <tr>
                             <td>{{$sl+1}}</td>
                             <td>{{App\Models\Order::find($order_cancel_list->order_id)->order_id}}</td>
+                            @can('order_cancel_action')
                             <td>
                                 <a href="{{route('cancel.details', $order_cancel_list->id)}}" class="btn skybluee">View</a>
                                 <a href="{{route('cancel.accept', $order_cancel_list->id)}}" class="btn greeenn">Accept</a>
                             </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </table>
@@ -28,6 +31,7 @@
         </div>
     </div>
 </div>
+@endcan
 @endsection
 
 @section('footer_script')
