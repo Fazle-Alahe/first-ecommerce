@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerEmailVerify;
 use App\Models\Order;
 use App\Models\OrderProducts;
 use App\Models\Shipping;
@@ -115,5 +116,23 @@ class CustomerController extends Controller
         ]);
     
         return $pdf->download('myorders.pdf');
+    }
+
+    function customer_email_verify($token){
+        $verify_info = CustomerEmailVerify::where('token', $token)->first();
+
+        if(CustomerEmailVerify::where('token', $token)->exists()){
+            Customer::find($verify_info->customer_id)->update([
+                'email_verified_at' => Carbon::now(),
+            ]);
+    
+            CustomerEmailVerify::where('token', $token)->delete();
+    
+            return redirect()->route('customer.login')->with('verify', 'Email verified success!');
+        }
+        else{
+            abort('404');
+        }
+
     }
 }

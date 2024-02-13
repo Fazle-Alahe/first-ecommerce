@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerEmailVerify;
+use App\Notifications\EmailVerifyNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rules\Password;
 
 class CustomerAuthController extends Controller
@@ -33,14 +36,25 @@ class CustomerAuthController extends Controller
             ],
             'password_confirmation' => 'required',
         ]);
-        Customer::insert([
+
+        $customer_info = Customer::create([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'created_at' => Carbon::now(),
         ]);
-        return back()->with('success', 'Customer Registered Successfully');
+
+        CustomerEmailVerify::where('customer_id', $customer_info->id)->delete();
+        $info = CustomerEmailVerify::create([
+            'customer_id' => $customer_info->id,
+            'token' => uniqid(),
+            'created_at' => Carbon::now(),
+        ]);
+
+        Notification::send($customer_info, new EmailVerifyNotification($info));
+
+        return back()->with('success', 'Customer Registered Successfully,Please verify your email.');
     }
 
     function customer_logged(Request $request){

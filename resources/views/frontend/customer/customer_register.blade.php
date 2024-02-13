@@ -113,6 +113,9 @@
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default reveal2" type="button"><i class="ti-eye"></i></button>
                                             </span>
+                                            {{-- @if (session('wrong'))
+                                                <strong class="text-danger">{{session('wrong')}}</strong>
+                                            @endif --}}
                                             @error('password_confirmation')
                                                 <strong class="text-danger">Confirm Password is required.</strong>
                                             @enderror

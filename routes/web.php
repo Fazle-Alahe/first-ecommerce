@@ -14,6 +14,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PassResetController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -152,6 +153,7 @@ Route::get('/customer/logout/', [CustomerController::class, 'customer_logout'])-
 Route::post('/customer/profile/update/', [CustomerController::class, 'customer_profile_update'])->name('customer.profile.update');
 Route::get('/customer/my/orders/', [CustomerController::class, 'my_orders'])->name('my.orders');
 Route::get('/download/invoice/{id}', [CustomerController::class, 'download_invoice'])->name('download.invoice');
+Route::get('/customer/email/verify/{token}', [CustomerController::class, 'customer_email_verify'])->name('customer.email.verify');
 
 // Cart
 Route::post('/add/cart/', [CartController::class, 'add_cart'])->name('add.cart');
@@ -218,3 +220,9 @@ Route::get('/role/edit/{id}', [RoleController::class, 'role_edit'])->name('role.
 Route::post('/role/update/{id}', [RoleController::class, 'role_update'])->name('role.update');
 Route::post('/role/assign/', [RoleController::class, 'role_assign'])->name('role.asign');
 Route::get('/role/remove/{id}', [RoleController::class, 'role_remove'])->name('role.remove');
+
+// Password reset
+Route::get('/password/reset/', [PassResetController::class, 'password_reset'])->name('password.reset');
+Route::post('/pass/reset/req/', [PassResetController::class, 'pass_reset_req'])->name('pass.reset.req');
+Route::get('/pass/reset/form/{token}', [PassResetController::class, 'pass_reset_form'])->name('pass.reset.form');
+Route::post('/pass/reset/confirm/{token}', [PassResetController::class, 'pass_reset_confirm'])->name('pass.reset.confirm');

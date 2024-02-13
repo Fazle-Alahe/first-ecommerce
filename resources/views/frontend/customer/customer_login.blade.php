@@ -72,6 +72,12 @@
                                     <h2>Login</h2>
                                     <p>Sign into your pages account</p>
                                 </div>
+                                @if (session('reset'))
+                                    <div class="alert alert-success">{{session('reset')}}</div>
+                                @endif
+                                @if (session('verify'))
+                                    <div class="alert alert-success">{{session('verify')}}</div>
+                                @endif
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label>Email</label>
@@ -104,9 +110,8 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <div class="check-box-wrap">
-                                            
                                             <div class="forget-btn">
-                                                <a href="forgot.html">Forgot Password?</a>
+                                                <a href="{{route('password.reset')}}">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>
