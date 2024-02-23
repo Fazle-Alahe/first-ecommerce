@@ -65,7 +65,13 @@ class CustomerAuthController extends Controller
 
         if(Customer::where('email', $request->email)->exists()){
             if(Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password])){
-                return redirect()->route('index');
+                if(Auth::guard('customer')->user()->email_verified_at == null){
+                    Auth::guard('customer')->logout();
+                    return back()->with('email_verify', 'Please verify your email');
+                }
+                else{
+                    return redirect()->route('index');
+                }
             }
             else{
                 return back()->with('wrong', 'Worng Credential.');

@@ -154,11 +154,13 @@ Route::post('/customer/profile/update/', [CustomerController::class, 'customer_p
 Route::get('/customer/my/orders/', [CustomerController::class, 'my_orders'])->name('my.orders');
 Route::get('/download/invoice/{id}', [CustomerController::class, 'download_invoice'])->name('download.invoice');
 Route::get('/customer/email/verify/{token}', [CustomerController::class, 'customer_email_verify'])->name('customer.email.verify');
+Route::get('/resend/verification/link/', [CustomerController::class, 'resend_verification_link'])->name('resend.verification.link');
+Route::post('/verification/link/sent/', [CustomerController::class, 'verification_link_sent'])->name('verification.link.sent');
 
 // Cart
 Route::post('/add/cart/', [CartController::class, 'add_cart'])->name('add.cart');
 Route::get('/cart/remove/{id}', [CartController::class, 'cart_remove'])->name('cart.remove');
-Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->middleware('customer')->name('cart');
 Route::post('/cart/update/', [CartController::class, 'cart_update'])->name('cart.update');
 
 // Coupon

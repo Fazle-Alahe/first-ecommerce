@@ -7,10 +7,13 @@ use App\Models\CustomerEmailVerify;
 use App\Models\Order;
 use App\Models\OrderProducts;
 use App\Models\Shipping;
+use App\Notifications\EmailVerifyNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+// use Barryvdh\DomPDF\PDF;
 use PDF;
 
 class CustomerController extends Controller
@@ -134,5 +137,32 @@ class CustomerController extends Controller
             abort('404');
         }
 
+    }
+
+    function resend_verification_link(){
+        return view('frontend.customer.email_verify');
+    }
+
+    function verification_link_sent(Request $request){
+        $request->validate([
+            'email' => 'required',
+        ]);
+
+        $customer = Customer::where('email', $request->email)->first();
+        if(Customer::where('email', $request->email)->exists()){
+            CustomerEmailVerify::where('customer_id', $customer->id)->delete();
+            $info = CustomerEmailVerify::create([
+                'customer_id' => $customer->id,
+                'token' => uniqid(),
+                'created_at' => Carbon::now(),
+            ]);
+
+            Notification::send($customer, new EmailVerifyNotification($info));
+
+            return back()->with('success', 'We have sent you a verification link,Please verify your email.');
+        }
+        else{
+            return back('exist', 'Email does not exist');
+        }
     }
 }

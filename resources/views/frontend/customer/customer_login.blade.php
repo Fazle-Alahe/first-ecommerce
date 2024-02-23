@@ -78,6 +78,12 @@
                                 @if (session('verify'))
                                     <div class="alert alert-success">{{session('verify')}}</div>
                                 @endif
+                                @if (session('email_verify'))
+                                    <div class="alert alert-success">
+                                        <span>{{session('email_verify')}}</span>
+                                        <a href="{{route('resend.verification.link')}}">&nbsp;Resend Verification Link</a>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <label>Email</label>
