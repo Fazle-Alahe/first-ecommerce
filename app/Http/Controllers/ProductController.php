@@ -86,7 +86,7 @@ class ProductController extends Controller
     }
 
     function product_list(){
-        $products = Product::all();
+        $products = Product::paginate(5);
         return view('product.list',[
             'products'=>$products,
         ]);

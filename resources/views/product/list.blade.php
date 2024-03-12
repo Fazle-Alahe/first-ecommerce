@@ -22,7 +22,7 @@
                     </tr>
                     @foreach ($products as $sl=>$product)
                     <tr>
-                        <td>{{$sl+1}}</td>
+                        <td>{{$products->firstitem()+$sl}}</td>
                         <td>{{$product->product_name}}</td>
                         <td>{{$product->product_price}}</td>
                         <td>{{$product->discount}}</td>
@@ -50,9 +50,14 @@
                             </a>
                         </td>
                         @endcan
-                    @endforeach
                     </tr>
+                    @endforeach
                 </table>
+                <div class="mt-3">
+                    {{$products->links('vendor.pagination.custom',[
+                        'products' => $products,
+                    ])}}
+                </div>
             </div>
         </div>
     </div>
