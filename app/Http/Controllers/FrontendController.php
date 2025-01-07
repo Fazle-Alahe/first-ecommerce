@@ -128,4 +128,11 @@ class FrontendController extends Controller
         }
         return back()->with('review', 'Review submitted successfully');
     }
+
+    public function category_products($id){
+        $products = Product::where('category_id', $id)->get();
+        return view('frontend.category_product',[
+            'products' => $products,
+        ]);
+    }
 }

@@ -177,10 +177,8 @@
                                 </div>
                                 <div class="search-box">
                                     <div class="input-group">
-                                        <input type="search" class="form-control"
-                                            placeholder="What are you looking for?">
-                                        <button class="search-btn" type="submit"> <i class="fi flaticon-search"></i>
-                                        </button>
+                                        <input type="search" class="form-control" placeholder="What are you looking for?">
+                                        <button class="search-btn" type="submit"> <i class="fi flaticon-search"></i></button>
                                     </div>
                                 </div>
                             </form>

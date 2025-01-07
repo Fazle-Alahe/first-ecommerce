@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="wpo-section-title">
-                    <h2>All Products</h2>
+                    {{-- <h2>All Products</h2> --}}
                 </div>
             </div>
         </div>
