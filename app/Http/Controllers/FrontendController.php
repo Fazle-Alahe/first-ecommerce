@@ -28,8 +28,13 @@ class FrontendController extends Controller
         $offer2 = Offer2::all();
         $products = Product::latest()->take(8)->get();
         $festivals = Festival::all();
-        $special_offers = SpecialOffer::all();
-        $special_offers2 = SpecialOffer2::all();
+
+        $topRatedProducts = Product::topReview(); 
+        usort($topRatedProducts, function($a, $b) {
+            return $b['average_rating'] <=> $a['average_rating'];
+        });
+        $topRatedProducts = array_slice($topRatedProducts, 0, 3);
+        // print_r($topRatedProducts);
         return view('frontend.index',[
             'banners' => $banners,
             'categories' => $categories,
@@ -37,8 +42,7 @@ class FrontendController extends Controller
             'offer2' => $offer2,
             'products' => $products,
             'festivals' => $festivals,
-            'special_offers' => $special_offers,
-            'special_offers2' => $special_offers2,
+            'topRatedProducts' => $topRatedProducts,
         ]);
     }
 

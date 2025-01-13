@@ -13,7 +13,7 @@
                     <div class="slide-title">
                         <h2>{{$banner->title}}</h2>
                     </div>
-                    <a class="theme-btn" href="product.html">Shop Now</a>
+                    {{-- <a class="theme-btn" href="product.html">Shop Now</a> --}}
                 </div>
             </div>
             @endforeach
@@ -131,7 +131,7 @@
                     }
                     else
                         $avg = round($total_stars/$total_reviews)
-                @endphp
+                    @endphp
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                         <div class="product-item">
                             <div class="image">
@@ -167,7 +167,7 @@
                                     @endif
                                 </div>
                                 <div class="shop-btn">
-                                    <a class="theme-btn-s2" href="product.html">Shop Now</a>
+                                    <a class="theme-btn-s2" href="{{route('product.details',$product->slug)}}">Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +242,7 @@
                                 </div>
                                 50
                             </div>% Off</div>
-                        <a class="upcoming-btn" href="product.html">Shop Now</a>
+                        {{-- <a class="upcoming-btn" href="product.html">Shop Now</a> --}}
                     </div>
                 </div>
             </div>
@@ -263,81 +263,47 @@
             </div>
         </div>
         <div class="row g-0">
-            <div class="col-lg-6 col-12">
-                <ul class="special-product">
-                    <li>
-                        <div class="product-item">
-                            <div class="image">
-                                <img height="250" src="{{asset('uploads/offer/')}}/{{$special_offers->first()->image}}" alt="">
-                            </div>
-                            <div class="text">
-                                <h2><a href="product-single.html" title="{{$special_offers->first()->product_name}}">
-                                    @if (strlen($special_offers->first()->product_name) > 20)
-                                        {{substr($special_offers->first()->product_name, 0, 20).'...'}}
-                                    @else
-                                        {{$special_offers->first()->product_name}}
-                                    @endif
-                                    </a>
-                                </h2>
-                                <div class="rating-product">
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <span>130</span>
+            @foreach (Main::ProductShow(2) as $product)
+                <div class="col-lg-6 col-12">
+                    <ul class="special-product">
+                        <li>
+                            <div class="product-item">
+                                <div class="image">
+                                    <img height="250" src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
                                 </div>
-                                <div class="price">
-                                    <span class="present-price">&#2547;{{$special_offers->first()->discount_price}}</span>
-                                    @if ($special_offers->first()->discount_price)
-                                        <del class="old-price">&#2547;{{$special_offers->first()->price}}</del>
-                                    @endif
-                                </div>
-                                <div class="shop-btn">
-                                    <a class="theme-btn-s2" href="product.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div><div class="col-lg-6 col-12">
-                <ul class="special-product">
-                    <li>
-                        <div class="product-item">
-                            <div class="image">
-                                <img height="250" src="{{asset('uploads/offer/')}}/{{$special_offers2->first()->image2}}" alt="">
-                            </div>
-                            <div class="text">
-                                <h2><a href="product-single.html" title="{{$special_offers2->first()->product_name2}}">
-                                    @if (strlen($special_offers2->first()->product_name2) > 20)
-                                        {{substr($special_offers2->first()->product_name2, 0, 20).'...'}}
-                                    @else
-                                        {{$special_offers2->first()->product_name2}}
-                                    @endif
-                                    </a>
-                                </h2>
-                                <div class="rating-product">
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <i class="fi flaticon-star"></i>
-                                    <span>130</span>
-                                </div>
-                                <div class="price">
-                                    <span class="present-price">&#2547;{{$special_offers2->first()->discount_price2}}</span>
-                                    @if ($special_offers2->first()->discount_price2)
-                                        <del class="old-price">&#2547;{{$special_offers2->first()->price2}}</del>
-                                    @endif
-                                </div>
-                                <div class="shop-btn">
-                                    <a class="theme-btn-s2" href="product.html">Shop Now</a>
+                                <div class="text">
+                                    <h2><a href="{{route('product.details',$product->slug)}}" title="{{$product->product_name}}">
+                                        @if (strlen($product->product_name) > 20)
+                                            {{substr($product->product_name, 0, 20).'...'}}
+                                        @else
+                                            {{$product->product_name}}
+                                        @endif
+                                        </a>
+                                    </h2>
+                                    <div class="rating-product">
+                                        @for ($i=1; $i<=$avg; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                        @for ($i=$avg; $i<5; $i++)
+                                            <i class="fa fa-star-o"></i>
+                                        @endfor
+                                        <span>{{$total_reviews}}</span>
+                                    </div>
+                                    <div class="price">
+                                        <span class="present-price">&#2547; {{$product->after_discount}}</span>
+                                        @if ($product->discount)
+                                            <del class="old-price">&#2547; {{$product->product_price}}</del>
+                                        @endif
+                                    </div>
+                                    <div class="shop-btn">
+                                        <a class="theme-btn-s2" href="{{route('product.details',$product->slug)}}">Shop Now</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                    </ul>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -354,7 +320,7 @@
             </div>
         </div>
         <div class="trendin-slider owl-carousel">
-           @foreach ($products as $product)
+           @foreach (Main::ProductShow(6) as $product)
            @php
                 $total_reviews =  App\Models\OrderProducts::where('product_id', $product->id)->whereNotNull('review')->count();
                 $total_stars =  App\Models\OrderProducts::where('product_id', $product->id)->whereNotNull('review')->sum('star');
@@ -377,7 +343,7 @@
                 </div>
                 <div class="text">
                     <h2>
-                        <a href="product-single.html" title="{{$product->product_name}}">
+                        <a href="{{route('product.details',$product->slug)}}" title="{{$product->product_name}}">
                         @if (strlen($product->product_name) > 20)
                             {{substr($product->product_name, 0, 20).'...'}}
                         @else
@@ -401,7 +367,7 @@
                         @endif
                     </div>
                     <div class="shop-btn">
-                        <a class="theme-btn-s2" href="product.html">Shop Now</a>
+                        <a class="theme-btn-s2" href="{{route('product.details',$product->slug)}}">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -489,7 +455,7 @@
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="highlight-wrap">
                     <h2>Recently added</h2>
-                    @foreach ($products->take(3) as $product)
+                    @foreach (Main::ProductShow(3) as $product)
                     @php
                         $total_reviews =  App\Models\OrderProducts::where('product_id', $product->id)->whereNotNull('review')->count();
                         $total_stars =  App\Models\OrderProducts::where('product_id', $product->id)->whereNotNull('review')->sum('star');
@@ -504,12 +470,12 @@
                         <div class="product-card">
                             <div class="card-image">
                                 <div class="image">
-                                    <img height="125px" src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
+                                    <img  width="100px" src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
                                 </div>
                             </div>
                             <div class="content">
                                 <h3>
-                                    <a href="product.html" title="{{$product->product_name}}">
+                                    <a href="{{route('product.details',$product->slug)}}" title="{{$product->product_name}}">
                                     @if (strlen($product->product_name) > 20)
                                         {{substr($product->product_name, 0, 20).'...'}}
                                     @else
@@ -538,72 +504,48 @@
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="highlight-wrap">
                     <h2>Top Rated</h2>
+                    @foreach ($topRatedProducts as $topRatedProduct)
+
+                    @php
+
+                        $product = App\Models\Product::find($topRatedProduct['product_id']);
+                        $total_reviews =  App\Models\OrderProducts::where('product_id', $product->id)->whereNotNull('review')->count();
+                        $total_stars =  App\Models\OrderProducts::where('product_id', $product->id)->whereNotNull('review')->sum('star');
+
+                        $avg = '';
+                        if($total_reviews == 0){
+                            $avg = 0;
+                        }
+                        else
+                            $avg = round($total_stars/$total_reviews)
+                    @endphp
                     <div class="product-card">
                         <div class="card-image">
                             <div class="image">
-                                <img src="{{asset('frontend')}}/images/top-rated/1.png" alt="">
+                                <img width="100px" src="{{asset('uploads/product/preview/')}}/{{$product->prev_img}}" alt="">
                             </div>
                         </div>
                         <div class="content">
-                            <h3><a href="product.html">Kids Shoes</a></h3>
+                            <h3><a href="{{route('product.details',$product->slug)}}">{{$product->product_name}}</a></h3>
+                            
                             <div class="rating-product">
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <span>120</span>
+                                @for ($i=1; $i<=$avg; $i++)
+                                    <i class="fa fa-star"></i>
+                                @endfor
+                                @for ($i=$avg; $i<5; $i++)
+                                    <i class="fa fa-star-o"></i>
+                                @endfor
+                                <span>{{$total_reviews}}</span>
                             </div>
                             <div class="price">
-                                <span class="present-price">$120.00</span>
-                                <del class="old-price">$150.00</del>
+                                <span class="present-price">&#2547; {{$product->after_discount}}</span>
+                                @if ($product->discount)
+                                    <del class="old-price">&#2547; {{$product->product_price}}</del>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <div class="product-card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{asset('frontend')}}/images/top-rated/2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h3><a href="product.html">Stylish Earrings</a></h3>
-                            <div class="rating-product">
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <span>230</span>
-                            </div>
-                            <div class="price">
-                                <span class="present-price">$150.00</span>
-                                <del class="old-price">$200.00</del>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{asset('frontend')}}/images/top-rated/3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h3><a href="product.html">Yellow Hats</a></h3>
-                            <div class="rating-product">
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <i class="fi flaticon-star"></i>
-                                <span>130</span>
-                            </div>
-                            <div class="price">
-                                <span class="present-price">$170.00</span>
-                                <del class="old-price">$250.00</del>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

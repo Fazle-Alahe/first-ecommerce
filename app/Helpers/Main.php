@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Helpers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\OrderProducts;
+use App\Models\Product;
 
-class Product extends Model
-{
-    use HasFactory;
-
-    protected $guarded =['id'];
-    
-    function rel_to_category(){
-        return $this->belongsTo(Category::class, 'category_id');
+class Main{
+    public static function ProductShow($product_quantity)
+    {
+        $products = Product::latest()->take($product_quantity)->get();
+        return $products;
     }
-
-    // function rel_to_order_products(){
-    //     return $this->belongsTo(OrderProducts::class, 'id');
-    // }
-
 
     public static function topReview(){
         $productRatings = [];
@@ -42,7 +34,8 @@ class Product extends Model
             ];
         }
         return $productRatings;
-        
-        // return array_slice($asscen, 0, 3);
+        // print_r($productRatings);
+    }
 }
-}
+
+?>

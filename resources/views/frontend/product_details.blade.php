@@ -225,7 +225,7 @@
                                                 </div> <!-- end comments-section -->
                                                 @auth('customer')
                                                     @if (App\Models\OrderProducts::where('customer_id', Auth::guard('customer')->id())->where('product_id', $product_info->id)->exists())
-                                                        @if (App\Models\OrderProducts::where('customer_id', Auth::guard('customer')->id())->whereNotNull('review')->first() == false)
+                                                        @if (App\Models\OrderProducts::where('customer_id', Auth::guard('customer')->id())->where('product_id', $product_info->id)->where('review')->exists())
                                                             <div class="col col-lg-10 col-12 review-form-wrapper">
                                                                 <div class="review-form">
                                                                     <h4>Add a review</h4>
