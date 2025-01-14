@@ -28,12 +28,22 @@ class CheckoutController extends Controller
     }
 
     function getCity(Request $request){
-        $str = '';
+        // $str = '';
         $cities = City::where('country_id', $request->country_id)->get();
-        foreach($cities as $city){
-            $str .= '<option value="'.$city->id.'">'.$city->name.'</option>';
-        }
-        echo $str;
+        // foreach($cities as $city){
+        //     $str .= '<option value="'.$city->id.'">'.$city->name.'</option>';
+        // }
+        // echo $str;
+
+        // print_r($cities);
+        $options = $cities->map(function($city) {
+            return '<option value="' . $city->id . '">' . $city->name . '</option>';
+        });
+        
+        return response()->json([
+            'status' => 'success',
+            'options' => implode('', $options->toArray()) // Convert the array of options into a single string
+        ]);
     }
 
     function order_store(Request $request){

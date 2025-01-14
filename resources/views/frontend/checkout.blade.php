@@ -332,14 +332,26 @@
                 }
             });
             $.ajax({
-                url:'/getCity',
+                url: "{{ route('getCity') }}",
                 type: 'POST',
                 data:{'country_id': country_id},
-
-                success:function(data){
-                    $('.city').html(data);
-                }
+                // success: On_success,
+                // // success:function(data){
+                // //     $('.city').html(data);
+                // // }
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Populate the city dropdown with the returned data
+                        $('.city').html(response.options).prop('disabled', false);
+                    } else {
+                        // Handle the error (no cities found)
+                        $('.city').html('<option>No cities found</option>').prop('disabled', false);
+                    }
+                },
             });
+            // function On_success(data){
+            //     console.log(data);
+            // } 
 
         })
     </script>
@@ -354,7 +366,7 @@
                 }
             });
             $.ajax({
-                url:'/getCity',
+                url: "{{ route('getCity') }}",
                 type: 'POST',
                 data:{'country_id': country_id},
 

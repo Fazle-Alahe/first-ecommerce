@@ -185,7 +185,7 @@
                                         <div class="col-lg-12 col-12">
                                             <div class="comments-area">
                                                 <div class="comments-section">
-                                                    <h3 class="comments-title">{{$reviews->count()}} reviews for Stylish Pink Coat</h3>
+                                                    <h3 class="comments-title">{{$reviews->count()}} reviews for {{$product_info->product_name}}</h3>
                                                     <ol class="comments">
                                                         @foreach ($reviews as $review) 
                                                         <li class="comment even thread-even depth-1" id="comment-1">
