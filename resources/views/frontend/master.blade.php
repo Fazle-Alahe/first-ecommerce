@@ -1,44 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="wpOceans">
-    <link rel="shortcut icon" type="image/png" href="{{asset('frontend')}}/images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('frontend') }}/images/favicon.png">
     <title>Themart - eCommerce HTML5 Template</title>
-    <link href="{{asset('frontend')}}/css/themify-icons.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/font-awesome.min.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/flaticon_ecommerce.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/animate.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/owl.carousel.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/owl.theme.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/slick.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/slick-theme.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/swiper.min.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/owl.transitions.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/jquery.fancybox.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/css/odometer-theme-default.css" rel="stylesheet">
-    <link href="{{asset('frontend')}}/sass/style.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/themify-icons.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/flaticon_ecommerce.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/animate.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/owl.carousel.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/owl.theme.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/slick.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/slick-theme.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/swiper.min.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/owl.transitions.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/jquery.fancybox.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/css/odometer-theme-default.css" rel="stylesheet">
+    <link href="{{ asset('frontend') }}/sass/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .select2-container {
             margin: 16px 0;
         }
+
         .select2-container--default .select2-selection--single {
             height: 40px;
             border: 1px solid #D9D9D9;
         }
+
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             height: 40px;
         }
+
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 38px;
         }
-        
+
         /* my order */
         .status_c {
             color: white;
@@ -46,7 +49,8 @@
             border-radius: 5px;
             margin-top: 5px;
         }
-        .abc{
+
+        .abc {
             padding: 5px;
             border-radius: 3px;
         }
@@ -56,37 +60,44 @@
             background: linear-gradient(180deg, #FED700 0%, #F78914 100%);
             color: white;
         }
+
         .greeenn {
             background: linear-gradient(180deg, #95CD2F 0%, #63911F 100%);
             color: white;
         }
+
         .reedd {
             background: linear-gradient(180deg, #b1452af0 0%, rgb(250, 4, 4) 100%);
             color: white;
         }
+
         .skybluee {
-            
+
             background: linear-gradient(180deg, #5df3f3 0%, #047281 100%);
             color: white;
         }
+
         .bluuee {
-            
+
             background: linear-gradient(180deg, #729bd8 0%, #3307ad 100%);
             color: white;
         }
+
         .returnn {
-            
+
             background: linear-gradient(180deg, #e352bc 0%, #850467 100%);
             color: white;
         }
-      .secondary {
-          background: linear-gradient(180deg, #96969c 0%, #53535b 100%);
-          color: white;
-      }
-      .rtnprocess {
-          background: linear-gradient(180deg, #d895c6 0%, #6e4269 100%);
-          color: white;
-      }
+
+        .secondary {
+            background: linear-gradient(180deg, #96969c 0%, #53535b 100%);
+            color: white;
+        }
+
+        .rtnprocess {
+            background: linear-gradient(180deg, #d895c6 0%, #6e4269 100%);
+            color: white;
+        }
     </style>
 </head>
 
@@ -102,7 +113,7 @@
                     <div class="loader-line-mask">
                         <div class="loader-line"></div>
                     </div>
-                    <img src="{{asset('frontend')}}/images/preloader.png" alt="">
+                    <img src="{{ asset('frontend') }}/images/preloader.png" alt="">
                 </div>
             </div>
         </div>
@@ -162,7 +173,8 @@
                                 @php
                                     $logo = App\Models\Logo::first();
                                 @endphp
-                                <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('uploads/logo/logo.svg')}}" alt="logo"></a>
+                                <a class="navbar-brand" href="{{ route('index') }}"><img
+                                        src="{{ asset('uploads/logo/logo.svg') }}" alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
@@ -171,14 +183,16 @@
                                     <select name="service" class="form-control">
                                         <option disabled="disabled" selected="">All Category</option>
                                         @foreach (App\Models\Category::all() as $category)
-                                            <option>{{$category->category_name}}</option>
+                                            <option>{{ $category->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="search-box">
                                     <div class="input-group">
-                                        <input type="search" class="form-control" placeholder="What are you looking for?">
-                                        <button class="search-btn" type="submit"> <i class="fi flaticon-search"></i></button>
+                                        <input type="search" class="form-control"
+                                            placeholder="What are you looking for?">
+                                        <button class="search-btn" type="submit"> <i
+                                                class="fi flaticon-search"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -186,103 +200,119 @@
                         <div class="col-lg-4 col-12">
                             <div class="middle-right">
                                 <ul>
-                                    <li><a href="compare.html"><i class="fi flaticon-right-and-left"></i><span>Compare</span></a>
+                                    <li><a href="compare.html"><i
+                                                class="fi flaticon-right-and-left"></i><span>Compare</span></a>
                                     </li>
                                     <li>
                                         @auth('customer')
-                                            <a href="{{route('customer.profile')}}"><i class="fi flaticon-user-profile"></i><span>{{Auth::guard('customer')->user()->fname.' '.Auth::guard('customer')->user()->lname}}</span></a>
+                                            <a href="{{ route('customer.profile') }}"><i
+                                                    class="fi flaticon-user-profile"></i><span>{{ Auth::guard('customer')->user()->fname . ' ' . Auth::guard('customer')->user()->lname }}</span></a>
                                         @else
-                                            <a href="{{route('customer.login')}}"><i class="fi flaticon-user-profile"></i><span>Login</span></a>
+                                            <a href="{{ route('customer.login') }}"><i
+                                                    class="fi flaticon-user-profile"></i><span>Login</span></a>
                                         @endauth
                                     </li>
-                                        <div class="header-wishlist-form-wrapper">
-                                            <button class="wishlist-toggle-btn"> <i class="fi flaticon-heart"></i>
-                                                <span class="cart-count">3</span></button>
-                                            <div class="mini-wislist-content">
-                                                <button class="mini-cart-close"><i class="ti-close"></i></button>
-                                                <div class="mini-cart-items">
-                                                    <div class="mini-cart-item clearfix">
-                                                        <div class="mini-cart-item-image">
-                                                            <a href="product.html"><img src="{{asset('frontend')}}/images/cart/img-1.jpg" alt></a>
-                                                        </div>
-                                                        <div class="mini-cart-item-des">
-                                                            <a href="product.html">Stylish Pink Coat</a>
-                                                            <span class="mini-cart-item-price">$150</span>
-                                                            <span class="mini-cart-item-quantity"><a href="#"><i
-                                                                        class="ti-close"></i></a></span>
-                                                        </div>
+                                    <div class="header-wishlist-form-wrapper">
+                                        <button class="wishlist-toggle-btn"> <i class="fi flaticon-heart"></i>
+                                            <span class="cart-count">3</span></button>
+                                        <div class="mini-wislist-content">
+                                            <button class="mini-cart-close"><i class="ti-close"></i></button>
+                                            <div class="mini-cart-items">
+                                                <div class="mini-cart-item clearfix">
+                                                    <div class="mini-cart-item-image">
+                                                        <a href="product.html"><img
+                                                                src="{{ asset('frontend') }}/images/cart/img-1.jpg"
+                                                                alt></a>
                                                     </div>
-                                                    <div class="mini-cart-item clearfix">
-                                                        <div class="mini-cart-item-image">
-                                                            <a href="product.html"><img
-                                                                    src="{{asset('frontend')}}/images/cart/img-2.jpg"
-                                                                    alt></a>
-                                                        </div>
-                                                        <div class="mini-cart-item-des">
-                                                            <a href="product.html">Blue Bag</a>
-                                                            <span class="mini-cart-item-price">$120</span>
-                                                            <span class="mini-cart-item-quantity"><a href="#"><i
-                                                                        class="ti-close"></i></a></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mini-cart-item clearfix">
-                                                        <div class="mini-cart-item-image">
-                                                            <a href="product.html"><img
-                                                                    src="{{asset('frontend')}}/images/cart/img-3.jpg"
-                                                                    alt></a>
-                                                        </div>
-                                                        <div class="mini-cart-item-des">
-                                                            <a href="product.html">Kids Blue Shoes</a>
-                                                            <span class="mini-cart-item-price">$120</span>
-                                                            <span class="mini-cart-item-quantity"><a href="#"><i
-                                                                        class="ti-close"></i></a></span>
-                                                        </div>
+                                                    <div class="mini-cart-item-des">
+                                                        <a href="product.html">Stylish Pink Coat</a>
+                                                        <span class="mini-cart-item-price">$150</span>
+                                                        <span class="mini-cart-item-quantity"><a href="#"><i
+                                                                    class="ti-close"></i></a></span>
                                                     </div>
                                                 </div>
-                                                <div class="mini-cart-action clearfix">
-                                                    <div class="mini-btn">
-                                                        <a href="wishlist.html" class="view-cart-btn">View Wishlist</a>
+                                                <div class="mini-cart-item clearfix">
+                                                    <div class="mini-cart-item-image">
+                                                        <a href="product.html"><img
+                                                                src="{{ asset('frontend') }}/images/cart/img-2.jpg"
+                                                                alt></a>
+                                                    </div>
+                                                    <div class="mini-cart-item-des">
+                                                        <a href="product.html">Blue Bag</a>
+                                                        <span class="mini-cart-item-price">$120</span>
+                                                        <span class="mini-cart-item-quantity"><a href="#"><i
+                                                                    class="ti-close"></i></a></span>
+                                                    </div>
+                                                </div>
+                                                <div class="mini-cart-item clearfix">
+                                                    <div class="mini-cart-item-image">
+                                                        <a href="product.html"><img
+                                                                src="{{ asset('frontend') }}/images/cart/img-3.jpg"
+                                                                alt></a>
+                                                    </div>
+                                                    <div class="mini-cart-item-des">
+                                                        <a href="product.html">Kids Blue Shoes</a>
+                                                        <span class="mini-cart-item-price">$120</span>
+                                                        <span class="mini-cart-item-quantity"><a href="#"><i
+                                                                    class="ti-close"></i></a></span>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="mini-cart-action clearfix">
+                                                <div class="mini-btn">
+                                                    <a href="wishlist.html" class="view-cart-btn">View Wishlist</a>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
                                     </li>
                                     <li>
                                         <div class="mini-cart">
                                             <button class="cart-toggle-btn"> <i class="fi flaticon-add-to-cart"></i>
-                                                <span class="cart-count">{{App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->count()}}</span></button>
+                                                <span
+                                                    class="cart-count">{{ App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->count() }}</span></button>
                                             <div class="mini-cart-content">
                                                 <button class="mini-cart-close"><i class="ti-close"></i></button>
                                                 <div class="mini-cart-items">
                                                     @php
                                                         $sub = 0;
                                                     @endphp
-                                                    @foreach (App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->get() as  $cart)
+                                                    @foreach (App\Models\Cart::where('customer_id', Auth::guard('customer')->id())->get() as $cart)
                                                         <div class="mini-cart-item clearfix">
                                                             <div class="mini-cart-item-image">
-                                                                <a href="product.html"><img src="{{asset('uploads/product/preview/')}}/{{$cart->rel_to_product->prev_img}}" alt></a>
+                                                                <a href="product.html"><img
+                                                                        src="{{ asset('uploads/product/preview/') }}/{{ $cart->rel_to_product->prev_img }}"
+                                                                        alt></a>
                                                             </div>
                                                             <div class="mini-cart-item-des">
-                                                                <a href="product.html" title="{{$cart->rel_to_product->product_name}}">{{Str::substr($cart->rel_to_product->product_name, 0, 17).'..'}}</a>
+                                                                <a href="product.html"
+                                                                    title="{{ $cart->rel_to_product->product_name }}">{{ Str::substr($cart->rel_to_product->product_name, 0, 17) . '..' }}</a>
                                                                 <div class="d-flex">
-                                                                    <span class="mini-cart-item-price">&#2547;{{$cart->rel_to_product->after_discount}} x {{$cart->quantity}}</span>
-                                                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                    <span class="mini-cart-item-price">&#2547;{{$cart->rel_to_product->after_discount * $cart->quantity}}</span>
+                                                                    <span
+                                                                        class="mini-cart-item-price">&#2547;{{ $cart->rel_to_product->after_discount }}
+                                                                        x {{ $cart->quantity }}</span>
+                                                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                    &nbsp; &nbsp; &nbsp;
+                                                                    <span
+                                                                        class="mini-cart-item-price">&#2547;{{ $cart->rel_to_product->after_discount * $cart->quantity }}</span>
                                                                 </div>
-                                                                <span class="mini-cart-item-quantity"><a href="{{route('cart.remove',$cart->id)}}">
-                                                                    <i class="ti-close"></i></a></span>
+                                                                <span class="mini-cart-item-quantity"><a
+                                                                        href="{{ route('cart.remove', $cart->id) }}">
+                                                                        <i class="ti-close"></i></a></span>
                                                             </div>
                                                         </div>
-                                                    @php
-                                                        $sub += $cart->rel_to_product->after_discount * $cart->quantity;
-                                                    @endphp
+                                                        @php
+                                                            $sub +=
+                                                                $cart->rel_to_product->after_discount * $cart->quantity;
+                                                        @endphp
                                                     @endforeach
                                                 </div>
                                                 <div class="mini-cart-action clearfix">
                                                     <span class="mini-checkout-price">Subtotal:
                                                         <span>&#2547;{{ $sub }}</span></span>
                                                     <div class="mini-btn">
-                                                        <a href="{{route('cart')}}" class="view-cart-btn">View Cart</a>
+                                                        <a href="{{ route('cart') }}" class="view-cart-btn">View
+                                                            Cart</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,8 +341,8 @@
                             </div>
                             <div class="col-lg-1 col-md-6 col-sm-5 col-6 d-block d-lg-none">
                                 <div class="navbar-header">
-                                    <a class="navbar-brand" href="index.html"><img src="{{asset('frontend')}}/images/logo.svg"
-                                            alt="logo"></a>
+                                    <a class="navbar-brand" href="index.html"><img
+                                            src="{{ asset('frontend') }}/images/logo.svg" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-4 col-3">
@@ -321,14 +351,17 @@
                                     <div class="mini-shop-item">
                                         <ul id="metis-menu">
                                             @foreach (App\Models\Category::all() as $category)
-                                            <li class="header-catagory-item">
-                                                <a class="menu-down-{{App\Models\Subcategory::where('category_id', $category->id)->count() != 0 ? 'arrow':''}}" href="#">{{$category->category_name}}</a>
-                                                <ul class="header-catagory-single">
-                                                    @foreach (App\Models\Subcategory::where('category_id', $category->id)->get() as $subcategory)
-                                                    <li><a href="#">{{$subcategory->subcategory_name}}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
+                                                <li class="header-catagory-item">
+                                                    <a class="menu-down-{{ App\Models\Subcategory::where('category_id', $category->id)->count() != 0 ? 'arrow' : '' }}"
+                                                        href="#">{{ $category->category_name }}</a>
+                                                    <ul class="header-catagory-single">
+                                                        @foreach (App\Models\Subcategory::where('category_id', $category->id)->get() as $subcategory)
+                                                            <li><a
+                                                                    href="#">{{ $subcategory->subcategory_name }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -355,7 +388,7 @@
                             </div>
                             <div class="col-lg-2 col-md-1 col-1">
                                 <div class="header-right">
-                                    <a href="recent-view.html" class="recent-btn"><i class="fi flaticon-refresh"></i> 
+                                    <a href="recent-view.html" class="recent-btn"><i class="fi flaticon-refresh"></i>
                                         <span>Recently Viewed</span>
                                     </a>
                                 </div>
@@ -366,7 +399,7 @@
             </div>
         </header>
         <!-- end of header -->
-        
+
         @yield('content')
 
         <!-- start of wpo-site-footer-section -->
@@ -377,7 +410,7 @@
                         <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
                             <div class="widget about-widget">
                                 <div class="logo widget-title">
-                                    <img src="{{asset('frontend')}}/images/logo-2.svg" alt="blog">
+                                    <img src="{{ asset('frontend') }}/images/logo-2.svg" alt="blog">
                                 </div>
                                 <p>Elit commodo nec urna erat morbi at hac turpis aliquam.
                                     In tristique elit nibh turpis. Lacus volutpat ipsum convallis tellus pellentesque
@@ -442,17 +475,23 @@
                                     <h3>Instagram</h3>
                                 </div>
                                 <ul class="d-flex">
-                                    <li><a href="project-single.html"><img src="{{asset('frontend')}}/images/instragram/1.jpg"
+                                    <li><a href="project-single.html"><img
+                                                src="{{ asset('frontend') }}/images/instragram/1.jpg"
                                                 alt=""></a></li>
-                                    <li><a href="project-single.html"><img src="{{asset('frontend')}}/images/instragram/2.jpg"
+                                    <li><a href="project-single.html"><img
+                                                src="{{ asset('frontend') }}/images/instragram/2.jpg"
                                                 alt=""></a></li>
-                                    <li><a href="project-single.html"><img src="{{asset('frontend')}}/images/instragram/4.jpg"
+                                    <li><a href="project-single.html"><img
+                                                src="{{ asset('frontend') }}/images/instragram/4.jpg"
                                                 alt=""></a></li>
-                                    <li><a href="project-single.html"><img src="{{asset('frontend')}}/images/instragram/3.jpg"
+                                    <li><a href="project-single.html"><img
+                                                src="{{ asset('frontend') }}/images/instragram/3.jpg"
                                                 alt=""></a></li>
-                                    <li><a href="project-single.html"><img src="{{asset('frontend')}}/images/instragram/4.jpg"
+                                    <li><a href="project-single.html"><img
+                                                src="{{ asset('frontend') }}/images/instragram/4.jpg"
                                                 alt=""></a></li>
-                                    <li><a href="project-single.html"><img src="{{asset('frontend')}}/images/instragram/1.jpg"
+                                    <li><a href="project-single.html"><img
+                                                src="{{ asset('frontend') }}/images/instragram/1.jpg"
                                                 alt=""></a></li>
                                 </ul>
                             </div>
@@ -480,11 +519,12 @@
                 <div class="wpo-newsletter-popup-ineer">
                     <button class="btn newsletter-close-btn"><i class="ti-close"></i></button>
                     <div class="img-holder">
-                        <img src="{{asset('frontend')}}/images/newsletter.jpg" alt>
+                        <img src="{{ asset('frontend') }}/images/newsletter.jpg" alt>
                     </div>
                     <div class="details">
                         <h4>Get 30% discount shipped to your inbox</h4>
-                        <p>Subscribe to the Themart eCommerce newsletter to receive timely updates to your favorite products</p>
+                        <p>Subscribe to the Themart eCommerce newsletter to receive timely updates to your favorite
+                            products</p>
                         <form>
                             <div>
                                 <input type="email" placeholder="Enter your email">
@@ -508,16 +548,17 @@
 
     <!-- All JavaScript files
     ================================================== -->
-    <script src="{{asset('frontend')}}/js/jquery.min.js"></script>
-    <script src="{{asset('frontend')}}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('frontend') }}/js/jquery.min.js"></script>
+    <script src="{{ asset('frontend') }}/js/bootstrap.bundle.min.js"></script>
     <!-- Plugins for this template -->
-    <script src="{{asset('frontend')}}/js/modernizr.custom.js"></script>
-    <script src="{{asset('frontend')}}/js/jquery.dlmenu.js"></script>
-    <script src="{{asset('frontend')}}/js/jquery-plugin-collection.js"></script>
+    <script src="{{ asset('frontend') }}/js/modernizr.custom.js"></script>
+    <script src="{{ asset('frontend') }}/js/jquery.dlmenu.js"></script>
+    <script src="{{ asset('frontend') }}/js/jquery-plugin-collection.js"></script>
     <!-- Custom script for this template -->
-    <script src="{{asset('frontend')}}/js/script.js"></script>
+    <script src="{{ asset('frontend') }}/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @yield('footer_script')
 </body>
+
 </html>
